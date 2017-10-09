@@ -1,0 +1,22 @@
+{% extends "mainsite/base.html" %}
+
+{% block content %}
+
+<h2>xiangmujihua:{{ item }}</h2>
+
+
+<p>Entry:</p>
+<p>
+<a href="{% url 'mainsite:new_itementry' item.id %}">znegjiaentry</a>
+</p>
+<ul>
+    {% for entry in entries %}
+        <li>
+            <p>{{ entry.pub_date|date:'Y m d H:i' }}</p>
+            <p>{{ entry.text|linebreaks }}</p>
+        </li>
+    {% empty %}
+        <h2>hai mei xie</h2>
+    {% endfor %}
+</ul>
+{% endblock content %}

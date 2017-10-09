@@ -1,0 +1,21 @@
+{% extends "mainsite/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>编辑项目计划内容：</h2>
+{% endblock header %}
+
+{% block content %}
+
+<p><a href="{% url 'mainsite:item'   item.id %}">{{ item }}</a></p>
+
+<h2>编辑项目计划内容:</h2>
+<form action="{% url 'mainsite:edit_itementry'   entry.id %}"   method='post'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+	
+	{% buttons %}
+    <button name="submit">保存</button>
+	{% endbuttons %}
+</form>
+{% endblock content %}

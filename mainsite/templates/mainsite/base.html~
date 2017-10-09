@@ -1,0 +1,12 @@
+<p>
+    <a href="{% url 'mainsite:index' %}">yixueshujulalal</a> -
+    <a href="{% url 'mainsite:charpters' %}">xuexizhangjie</a> -
+    <a href="{% url 'mainsite:items' %}">xiangmujihua</a>-
+	{% if users.is_authenticated %}
+	Hello,{{ user.username }}.
+	{% else %}
+	<a href="{% url 'users:login %}">log in </a>
+	{% endif %}
+</p>
+
+{% block content %}{% endblock content %}

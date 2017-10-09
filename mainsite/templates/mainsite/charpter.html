@@ -1,0 +1,24 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2>跟新日志：{{ chapter }}</h2>
+{% endblock %}
+
+{% block content %}
+
+  {% for entry in entries %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ entry.pub_date|date:'Y m d H:i' }}
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ entry.text|linebreaks }}
+      </div>
+    </div> <!-- panel -->
+  {% empty %}
+    还没有更新日志内容
+  {% endfor %}
+
+{% endblock content %}

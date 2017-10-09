@@ -1,0 +1,16 @@
+{% extends "mainsite/base.html" %}
+
+{% block content %}
+
+<h2>xuexizhangjie</h2>
+
+<ul>
+ {% for charpter in charpters %}
+	<li>
+		<a href="{% url 'mainsite:charpter' charpter.id %}">{{ charpter }}</a>
+	</li>
+{% empty %}
+	<h2>Waiting</h2>
+{% endfor %}
+</ul>
+{% endblock content %}

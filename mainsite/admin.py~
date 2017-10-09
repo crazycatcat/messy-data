@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.contrib import admin
+
+from .models import  Charpter,Item,charpterEntry,itemEntry,Statistic,DataMining,DataLab
+
+
+# Register your models here.
+class CharpterAdmin(admin.ModelAdmin):
+    list_display=('title','pub_date')
+
+admin.site.register(Charpter,CharpterAdmin)
+
+class ItemAdmin(admin.ModelAdmin):
+    list_display=('title','pub_date')
+
+admin.site.register(Item,ItemAdmin)
+
+admin.site.register(charpterEntry)
+
+admin.site.register(itemEntry)
+
+admin.site.register(Statistic)
+admin.site.register(DataMining)
+admin.site.register(DataLab)
+
+
+
+
+

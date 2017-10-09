@@ -1,0 +1,31 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2>{{ item }}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    <a href="{% url 'mainsite:new_itementry' item.id %}">撰写项目计划内容</a>
+  </p>
+
+  {% for entry in entries %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ entry.pub_date|date:'Y m d H:i' }}
+          <small>
+            <a href="{% url 'mainsite:edit_itementry' entry.id %}">
+              编辑内容</a>
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ entry.text|linebreaks }}
+      </div>
+    </div> <!-- panel -->
+  {% empty %}
+    还没有撰写项目计划内容
+  {% endfor %}
+
+{% endblock content %}

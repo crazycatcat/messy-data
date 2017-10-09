@@ -1,0 +1,22 @@
+{% extends "mainsite/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>注册账号</h2>
+{% endblock %}
+
+{% block content %}
+
+
+<form method='post' action="{% url 'users:register' %}">
+{% csrf_token %}
+{% bootstrap_form form %}
+
+
+<button name="submit" >提交</button>
+
+
+<input type='hidden' name='next' value="{% url 'mainsite:index' %}" />
+ </form>
+
+{% endblock content %}

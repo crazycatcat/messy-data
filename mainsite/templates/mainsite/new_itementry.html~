@@ -1,0 +1,14 @@
+{% extends "mainsite/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'mainsite:item' item.id %}">{{ item }}</a></p>
+
+<p>zengjiayigeentry</p>
+
+<form action="{% url 'mainsite:new_itementry' item.id %}" method='post'>
+    {% csrf_token %}
+	{{ form.as_p }}
+	<button name="submit">znegjiaentry</button>
+</form>
+{% endblock content %}

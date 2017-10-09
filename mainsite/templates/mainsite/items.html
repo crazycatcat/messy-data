@@ -1,0 +1,23 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1>项目计划</h1>
+{% endblock %}
+
+{% block content %}
+
+  <ul>
+    {% for item in items %}
+      <li>
+        <h3>
+          <a href="{% url 'mainsite:item'  item.id %}">{{ item }}</a>
+        </h3>
+      </li>
+    {% empty %}
+      <li>还没有撰写第一个项目计划</li>
+    {% endfor %}
+  </ul>
+  
+  <h3><a href="{% url 'mainsite:new_item' %}">添加新的项目计划</h3>
+
+{% endblock content %}
