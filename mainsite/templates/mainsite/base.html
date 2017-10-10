@@ -25,8 +25,8 @@
               data-toggle="collapse" data-target="#navbar"
               aria-expanded="false" aria-controls="navbar">
           </button>
-          <a class="navbar-brand" href="{% url 'mainsite:index' %}"><h4  style='font-family:微软雅黑'>
-              医学数据统计分析平台</h4></a>
+          <a class="navbar-brand" href="{% url 'mainsite:index' %}">{% load staticfiles %}
+      <img src="{% static 'images/logo.png' %}" width="180" height="40" /></a>
         </div>
         
         <div id="navbar" class="navbar-collapse collapse">
