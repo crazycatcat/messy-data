@@ -1,16 +1,16 @@
 {% extends "mainsite/base.html" %}
 
 {% block header %}
-  <div class='jumbotron'>
+  <div class='jumbotron' style='font-family:微软雅黑'>
       <h1>医学数据统计分析平台</h1><h4>(Beta 0.03)</h4>        
   </div>
 {% endblock %}
 
 {% block content %}
-  <h2>
+  <h2 style='font-family:楷体'>
     <a href="{% url 'users:register' %}">注册账号</a> 进行项目计划撰写、医学数据统计、医学数据挖掘及探索Data-Lab。
   </h2>
-  <h2>
+  <h2 style='font-family:楷体'>
     从录入你的数据开始~
   </h2>
 {% endblock %}

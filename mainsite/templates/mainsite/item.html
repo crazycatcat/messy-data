@@ -1,12 +1,12 @@
 {% extends "mainsite/base.html" %}
 
 {% block header %}
-  <h2>{{ item }}</h2>
+  <h2 style='font-family:微软雅黑'>{{ item }}</h2>
 {% endblock header %}
 
 {% block content %}
   <p>
-    <a href="{% url 'mainsite:new_itementry' item.id %}">撰写项目计划内容</a>
+    <a href="{% url 'mainsite:new_itementry' item.id %}" style='font-family:微软雅黑'>撰写项目计划内容</a>
   </p>
 
   {% for entry in entries %}
@@ -20,7 +20,7 @@
           </small>
         </h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style='font-family:宋体'>
         {{ entry.text|linebreaks }}
       </div>
     </div> <!-- panel -->

@@ -1,7 +1,7 @@
 {% extends "mainsite/base.html" %}
 
 {% block header %}
-  <h1>项目计划</h1>
+  <h1 style='font-family:微软雅黑'>项目计划</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
     {% for item in items %}
       <li>
         <h3>
-          <a href="{% url 'mainsite:item'  item.id %}">{{ item }}</a>
+          <a href="{% url 'mainsite:item'  item.id %}" style='font-family:微软雅黑'>{{ item }}</a>
         </h3>
       </li>
     {% empty %}
@@ -18,6 +18,6 @@
     {% endfor %}
   </ul>
   
-  <h3><a href="{% url 'mainsite:new_item' %}">添加新的项目计划</h3>
+  <h3><a href="{% url 'mainsite:new_item' %}" style='font-family:宋体'>添加新的项目计划</h3>
 
 {% endblock content %}

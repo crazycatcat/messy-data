@@ -2,13 +2,13 @@
 {% load bootstrap3 %}
 
 {% block header %}
-  <h2>添加项目：</h2>
+  <h2 style='font-family:微软雅黑'>添加项目：</h2>
 {% endblock header %}
 
 {% block content %}
     
   <form action="{% url 'mainsite:new_item' %}" method='post'
-      class="form">
+      class="form" style='font-family:宋体'>
       
     {% csrf_token %}
     {% bootstrap_form form %}
