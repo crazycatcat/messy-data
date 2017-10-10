@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+STATIC_ROOT='/home/crazycat/Desktop/MessyData/MessyData/static/'
 
 LOGIN_URL='/users/login/'
 
@@ -141,7 +141,7 @@ if os.getcwd()=='/app':
     ALLOWED_HOSTS=['*']
     
     BASE_DIR=os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT='/home/crazycat/Desktop/MessyData/MessyData'
-    STATICFILES_DIRS=(
+    STATIC_ROOT='/home/crazycat/Desktop/MessyData/MessyData/static/'
+    '''STATICFILES_DIRS=(
         os.path.join(BASE_DIR,'static')
-    )
+    )'''
