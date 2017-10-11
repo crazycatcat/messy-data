@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from .forms import ItemForm,itemEntryForm
 
 from django.contrib.auth.decorators import login_required
+from .statistic import desStat
 
 # Create your views here.
 
@@ -112,3 +113,7 @@ def datalabs(request):
     datalabs=DataLab.objects.order_by('pub_date')
     context={'datalabs':datalabs}
     return render(request,'mainsite/datalabs.html',context)
+
+def desstat(request):
+    return render(request,'mainsite/desstat.html')
+    

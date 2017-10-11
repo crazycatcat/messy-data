@@ -1,3 +1,6 @@
+#!/usr/bin/env Python
+# coding=utf-8
+
 from django.conf.urls import url,include
 from . import views
 
@@ -10,7 +13,7 @@ urlpatterns = [
 	url(r'^items/$',views.items,name='items'),
 	#certain chapter
 	url(r'^charpters/(?P<charpter_id>\d+)/$',views.charpter,name='charpter'),
-	#certain chapter
+	#certain item
 	url(r'^items/(?P<item_id>\d+)/$',views.item,name='item'),
 	#new item
 	url(r'^new_item/$',views.new_item,name='new_item'),
@@ -20,6 +23,8 @@ urlpatterns = [
 	url(r'^edit_itementry/(?P<itementry_id>\d+)/$',views.edit_itementry,name='edit_itementry'),
 	#Statistics
 	url(r'^statistics/$',views.statistics,name='statistics'),
+	#Statistics
+	url(r'^statistics/desstat/$',views.desstat,name='desstat'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs

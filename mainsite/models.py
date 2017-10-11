@@ -99,3 +99,27 @@ class DataLab(models.Model):
     def __unicode__(self):
         return self.title
 
+'''class StatEntry(models.Model):
+    title=models.ForeignKey(Statistic)
+    #text=models.TextField()
+    #pub_date=models.DateTimeField(default=timezone.now)
+	
+    class Meta:
+	verbose_name_plural='itementries'
+        
+      
+    def __unicode__(self):
+        return self.title	
+
+class DesStat(models.Model):
+    #title=models.CharField(max_length=200)
+    #slug
+    body=models.TextField()
+    pub_date=models.DateTimeField(default=timezone.now)
+    #owner=models.ForeignKey(User)
+    
+    class Meta:
+        ordering=('-pub_date',)
+      
+    def __unicode__(self):
+        return self.title'''
