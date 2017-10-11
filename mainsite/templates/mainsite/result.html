@@ -1,1 +1,25 @@
-<p>none</p>
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>描述性统计分析结果：</h1>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+ <ul>
+      <li>
+        <h3 style='font-family:宋体'>
+         您的数据：{{ data }}<br/>
+		 --------------------------------------------------------------------------------------------------<br/>
+		 均数：{{datamean}}<br/>
+		 中位数：{{datamedian}}<br/>
+		 极差：{{datarange}}<br/>
+		 方差：{{datavar}}<br/>
+		 标准差：{{datastd}}<br/>
+		 变异系数：{{datacv}}%<br/>
+        </h3>
+      </li>
+  </ul>
+</h3>
+{% endblock content %}

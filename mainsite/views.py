@@ -16,6 +16,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.template.loader import get_template
 
+from numpy import mean,median,var,std,ptp
+
 
 
 
@@ -122,16 +124,21 @@ def desstat(request):
     return render(request,'mainsite/desstat.html')
 
 def result(request):
-    '''template=get_template('desstat.html')
-    try:
-	data=request.GET('user_data')
-    except:
-        data=null
-    data=data.split('，')
+    #template=get_template('desstat.html')
+    requestData=request.GET.copy()
+    data=requestData['user_data']
+    data=data.encode('utf-8')
     datanum=[]
-    for i in data:
+    for i in data.split(','):
 	datanum.append(int(i))
-    sum=sum(datanum)
-    context={'data':data}'''
-    return render(request,'mainsite/result.html')
+    total=sum(datanum)
+    datamean=round(mean(datanum),3)
+    datamedian=round(float(median(datanum)),3)
+    datarange=round(ptp(datanum),3)
+    datavar=round(var(datanum),3)
+    datastd=round(std(datanum),3)
+    datacv=round((datastd/datamean*100),3)
+	
+    context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
+    return render(request,'mainsite/result.html',context)
 
