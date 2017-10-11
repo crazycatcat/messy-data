@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 from .forms import ItemForm,itemEntryForm
 
 from django.contrib.auth.decorators import login_required
-from .statistic import desStat
+
 
 # Create your views here.
 
