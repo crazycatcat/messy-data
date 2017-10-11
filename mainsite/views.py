@@ -6,13 +6,17 @@ from django.shortcuts import render
 
 from .models import Charpter,Item,itemEntry,Statistic,DataMining,DataLab
 
-from django.http import HttpResponseRedirect,Http404
+from django.http import HttpResponseRedirect,Http404,HttpResponse
 
 from django.core.urlresolvers import reverse
 
 from .forms import ItemForm,itemEntryForm
 
 from django.contrib.auth.decorators import login_required
+
+from django.template.loader import get_template
+
+
 
 
 # Create your views here.
@@ -116,4 +120,18 @@ def datalabs(request):
 
 def desstat(request):
     return render(request,'mainsite/desstat.html')
-    
+
+def result(request):
+    '''template=get_template('desstat.html')
+    try:
+	data=request.GET('user_data')
+    except:
+        data=null
+    data=data.split('，')
+    datanum=[]
+    for i in data:
+	datanum.append(int(i))
+    sum=sum(datanum)
+    context={'data':data}'''
+    return render(request,'mainsite/result.html')
+

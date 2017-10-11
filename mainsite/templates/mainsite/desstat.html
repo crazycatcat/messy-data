@@ -1,1 +1,13 @@
-<p>none<p>
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>一、描述性统计分析</h1>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+      <a href="{% url 'mainsite:result'   %}" style='font-family:微软雅黑'>提交</a>
+	  
+</h3>
+{% endblock content %}

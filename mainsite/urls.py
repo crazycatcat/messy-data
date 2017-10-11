@@ -4,6 +4,7 @@
 from django.conf.urls import url,include
 from . import views
 
+
 urlpatterns = [
 	#homepage
 	url(r'^$',views.index,name='index'),
@@ -23,8 +24,10 @@ urlpatterns = [
 	url(r'^edit_itementry/(?P<itementry_id>\d+)/$',views.edit_itementry,name='edit_itementry'),
 	#Statistics
 	url(r'^statistics/$',views.statistics,name='statistics'),
-	#Statistics
+	#DesStatistics
 	url(r'^statistics/desstat/$',views.desstat,name='desstat'),
+	#DesStatisticsResult
+	url(r'^statistics/desstat/result/$',views.result,name='result'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs
