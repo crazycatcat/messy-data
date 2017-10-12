@@ -23,3 +23,4 @@ urlpatterns = [
     url(r'^users/', include('users.urls',namespace='users')),
     url(r'',include('mainsite.urls',namespace='mainsite')),
 ]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+

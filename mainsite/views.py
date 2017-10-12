@@ -155,12 +155,12 @@ def result(request):
     
     
     plt.boxplot(datanum)
-    plt.savefig('mainsite/media/images/boxplot.png')
+    plt.savefig('mainsite/static/images/boxplot.png')
     plt.close()
 	
     
     plt.hist(datanum)
-    plt.savefig('mainsite/media/images/hist.png')
+    plt.savefig('mainsite/static/images/hist.png')
     plt.close()
     
     
