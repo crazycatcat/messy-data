@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^users/', include('users.urls',namespace='users')),
     url(r'',include('mainsite.urls',namespace='mainsite')),
-]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
