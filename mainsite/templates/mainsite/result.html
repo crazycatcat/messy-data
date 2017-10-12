@@ -11,13 +11,20 @@
       <li>
         <h3 style='font-family:宋体'>
          您的数据：{{ data }}<br/>
+		 最重要的我都标出来了。。。是不是好贴心？
 		 -------------------------------------------------------------------------------------<br/>
-		 均数：{{datamean}}<br/>
+		 *均数：{{datamean}}<br/>
 		 中位数：{{datamedian}}<br/>
 		 极差：{{datarange}}<br/>
 		 方差：{{datavar}}<br/>
-		 标准差：{{datastd}}<br/>
+		 *标准差：{{datastd}}<br/>
 		 变异系数：{{datacv}}%<br/>
+		 <br/>
+		 BOXPLOT AND HIST:{% load staticfiles %}<br/>
+		<table><tr>
+             <td> <img src="{% static 'images/boxplot.png' %}"></td>
+			 <td><img src="{% static 'images/hist.png' %}"></td>
+		</tr></table>
         </h3>
       </li>
   </ul>

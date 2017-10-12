@@ -18,6 +18,14 @@ from django.template.loader import get_template
 
 from numpy import mean,median,var,std,ptp
 
+import matplotlib
+
+matplotlib.use('Agg')
+
+from matplotlib import pyplot
+
+from matplotlib.figure import Figure                      
+
 
 
 
@@ -129,7 +137,7 @@ def result(request):
     data=requestData['user_data']
     data=data.encode('utf-8')
     datanum=[]
-    for i in data.split(','):
+    for i in data.split(' '):
 	datanum.append(int(i))
     total=sum(datanum)
     datamean=round(mean(datanum),3)
@@ -138,7 +146,20 @@ def result(request):
     datavar=round(var(datanum),3)
     datastd=round(std(datanum),3)
     datacv=round((datastd/datamean*100),3)
+    
+    pyplot.boxplot(datanum)
+    pyplot.savefig('/home/crazycat/Desktop/MessyData/mainsite/static/images/boxplot.png')
+    pyplot.close()
+	
+    pyplot.hist(datanum)
+    pyplot.savefig('/home/crazycat/Desktop/MessyData/mainsite/static/images/hist.png')
+    pyplot.close()
+
+    
+    
+    
+	
+	
 	
     context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
     return render(request,'mainsite/result.html',context)
-
