@@ -148,11 +148,11 @@ def result(request):
     datacv=round((datastd/datamean*100),3)
     
     pyplot.boxplot(datanum)
-    pyplot.savefig('/home/crazycat/Desktop/MessyData/mainsite/static/images/boxplot.png')
+    pyplot.savefig('mainsite/static/images/boxplot.png')
     pyplot.close()
 	
     pyplot.hist(datanum)
-    pyplot.savefig('/home/crazycat/Desktop/MessyData/mainsite/static/images/hist.png')
+    pyplot.savefig('mainsite/static/images/hist.png')
     pyplot.close()
 
     
