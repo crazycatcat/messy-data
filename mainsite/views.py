@@ -127,8 +127,6 @@ def datalabs(request):
     return render(request,'mainsite/datalabs.html',context)
 
 def desstat(request):
-    os.remove('mainsite/static/images/boxplot.png')
-    os.remove('mainsite/static/images/hist.png')
     return render(request,'mainsite/desstat.html')
 
 
