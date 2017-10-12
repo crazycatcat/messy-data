@@ -99,6 +99,8 @@ class DataLab(models.Model):
     def __unicode__(self):
         return self.title
 
+
+		
 '''class StatEntry(models.Model):
     title=models.ForeignKey(Statistic)
     #text=models.TextField()

@@ -22,10 +22,8 @@ import matplotlib
 
 matplotlib.use('Agg')
 
-from matplotlib import pyplot
-
-from matplotlib.figure import Figure                      
-
+import matplotlib.pyplot as plt          
+import os
 
 
 
@@ -129,10 +127,15 @@ def datalabs(request):
     return render(request,'mainsite/datalabs.html',context)
 
 def desstat(request):
+    os.remove('mainsite/static/images/boxplot.png')
+    os.remove('mainsite/static/images/hist.png')
     return render(request,'mainsite/desstat.html')
 
+
+	
 def result(request):
-    #template=get_template('desstat.html')
+    
+	#template=get_template('desstat.html')
     requestData=request.GET.copy()
     data=requestData['user_data']
     data=data.encode('utf-8')
@@ -147,13 +150,15 @@ def result(request):
     datastd=round(std(datanum),3)
     datacv=round((datastd/datamean*100),3)
     
-    pyplot.boxplot(datanum)
-    pyplot.savefig('mainsite/static/images/boxplot.png')
-    pyplot.close()
+    
+    plt.boxplot(datanum)
+    plt.savefig('mainsite/static/images/boxplot.png')
+    plt.close()
 	
-    pyplot.hist(datanum)
-    pyplot.savefig('mainsite/static/images/hist.png')
-    pyplot.close()
+    
+    plt.hist(datanum)
+    plt.savefig('mainsite/static/images/hist.png')
+    plt.close()
 
     
     

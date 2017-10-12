@@ -4,7 +4,8 @@
 from django.conf.urls import url,include
 from . import views
 
-urlpatterns = ['',
+app_name = 'mainsite/notstatic'
+urlpatterns = [
 	#homepage
 	url(r'^$',views.index,name='index'),
 	#Cahrpters
@@ -26,7 +27,7 @@ urlpatterns = ['',
 	#DesStatistics
 	url(r'^statistics/desstat/$',views.desstat,name='desstat'),
 	#DesStatisticsResult
-	url(r'^statistics/desstat/result/$',mainsite.views.result,name='result'),
+	url(r'^statistics/desstat/result/$',views.result,name='result'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs
