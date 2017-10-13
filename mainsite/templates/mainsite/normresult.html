@@ -1,0 +1,31 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>正态性检验结果：</h1>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+ <ul>
+      <li>
+        <h3 style='font-family:宋体'>
+         您的数据：{{ data }}<br/>
+		 (采用最常用的Kolmogorov-Smirnov 检验,pp图和qq图就不画了反正也只是看个大概)<br/>
+		 最重要的我都标出来了。。。是不是好贴心？<br/>
+		 -------------------------------------------------------------------------------------<br/>
+		 Kolmogorov-Smirnov 检验的Z值：{{z}}<br/>
+		 *P值：{{p}}<br/>
+
+         <script>
+         if ({{p}}<0.1){
+         alert("不正态咯~哈哈哈哈哈哈")
+         }
+         </script>
+
+
+        </h3>
+      </li>
+  </ul>
+</h3>
+{% endblock content %}

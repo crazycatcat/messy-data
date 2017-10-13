@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 
 from numpy import mean,median,var,std,ptp
+import numpy as np
 
 import matplotlib
 
@@ -27,8 +28,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.dates import DateFormatter
 import matplotlib.pyplot as plt
 
-import random
-import datetime
+from scipy.stats import kstest
 
 
 
@@ -157,6 +157,7 @@ def result(request):
     context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
     return render(request,'mainsite/result.html',context)
 
+@login_required
 def boxplot(request):
     requestData=request.GET.copy()
     data=requestData['user_data']
@@ -174,7 +175,8 @@ def boxplot(request):
     canvas.print_png(response)
     plt.close(fig)
     return response
-	
+
+@login_required	
 def hist(request):
 	#template=get_template('desstat.html')
     requestData=request.GET.copy()
@@ -193,3 +195,20 @@ def hist(request):
     canvas.print_png(response)
     plt.close(fig)
     return response
+
+def normtest(request):
+    return render(request,'mainsite/normtest.html')
+	
+def normresult(request):
+    requestData=request.GET.copy()
+    data=requestData['user_data']
+    data=data.encode('utf-8')
+    datanum=[]
+    for i in data.split(' '):
+	datanum.append(int(i))
+    datanum=list(datanum)
+    res=kstest(datanum, 'norm')
+    z=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data':data,'z':z,'p':p}
+    return render(request,'mainsite/normresult.html',context)

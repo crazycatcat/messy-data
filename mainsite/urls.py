@@ -29,10 +29,14 @@ urlpatterns = [
 	url(r'^statistics/desstat/$',views.desstat,name='desstat'),
 	#DesStatisticsResult
 	url(r'^statistics/desstat/result/$',views.result,name='result'),
-	#DesStatisticsResult
+	#DesStatisticsResult-boxplot
 	url(r'^statistics/desstat/result/boxplot/$',views.boxplot,name='boxplot'),
-	#DesStatisticsResult
+	#DesStatisticsResult-hist
 	url(r'^statistics/desstat/result/hist/$',views.hist,name='hist'),
+	#normtest
+	url(r'^statistics/normtest/$',views.normtest,name='normtest'),
+	#normresult
+	url(r'^statistics/normresult/$',views.normresult,name='normresult'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs
