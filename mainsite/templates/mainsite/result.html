@@ -20,11 +20,30 @@
 		 *标准差：{{datastd}}<br/>
 		 变异系数：{{datacv}}%<br/>
 		 <br/>
-		 BOXPLOT AND HIST:{% load staticfiles %}<br/>
-		<table><tr>
-             <td> <img src="{% static 'media/images/boxplot.png' %}"></td>
-			 <td><img src="{% static 'media/images/hist.png' %}"></td>
-		</tr></table>
+		 BOXPLOT AND HIST:<br/>
+
+<h3 style='font-family:宋体'>BOXPLOT
+      <div class='container'>
+
+<form name='my form' action="{% url 'mainsite:boxplot'   %}" method='GET'>
+    <textarea name='user_data' rows=3 cols=70></textarea><br/>
+    <h4><input type='submit' value='提交'>
+    <input type='reset' value='清除重填'></h4>
+</form>
+</div>
+
+</h3>
+<h3 style='font-family:宋体'>HIST
+      <div class='container'>
+
+<form name='my form' action="{% url 'mainsite:hist'   %}" method='GET'>
+    <textarea name='user_data' rows=3 cols=70></textarea><br/>
+    <h4><input type='submit' value='提交'>
+    <input type='reset' value='清除重填'></h4>
+</form>
+</div>
+
+</h3>
         </h3>
       </li>
   </ul>

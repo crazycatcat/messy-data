@@ -142,9 +142,11 @@ def result(request):
     requestData=request.GET.copy()
     data=requestData['user_data']
     data=data.encode('utf-8')
+    
     datanum=[]
     for i in data.split(' '):
 	datanum.append(int(i))
+    
     total=sum(datanum)
     datamean=round(mean(datanum),3)
     datamedian=round(float(median(datanum)),3)
@@ -152,21 +154,42 @@ def result(request):
     datavar=round(var(datanum),3)
     datastd=round(std(datanum),3)
     datacv=round((datastd/datamean*100),3)
-    
-    
-    plt.boxplot(datanum)
-    plt.savefig('mainsite/static/media/images/boxplot.png')
-    plt.close()
-	
-    
-    plt.hist(datanum)
-    plt.savefig('mainsite/static/media/images/hist.png')
-    plt.close()
-    
-    
-    
-	
-	
-	
     context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
     return render(request,'mainsite/result.html',context)
+
+def boxplot(request):
+    requestData=request.GET.copy()
+    data=requestData['user_data']
+    data=data.encode('utf-8')
+     
+    datanum=[]
+    for i in data.split(' '):
+	datanum.append(int(i))
+    datanum=list(datanum)
+    fig=Figure(figsize=(6,6))
+    ax=fig.add_subplot(111)
+    ax.boxplot(datanum)
+    canvas=FigureCanvasAgg(fig)
+    response=HttpResponse(content_type='image/png')
+    canvas.print_png(response)
+    plt.close(fig)
+    return response
+	
+def hist(request):
+	#template=get_template('desstat.html')
+    requestData=request.GET.copy()
+    data=requestData['user_data']
+    data=data.encode('utf-8')
+    datanum=[]
+    for i in data.split(' '):
+	datanum.append(int(i))
+    datanum=list(datanum)
+    fig=Figure(figsize=(6,6))
+    ax=fig.add_subplot(111)
+    ax.hist(datanum)
+    
+    canvas=FigureCanvasAgg(fig)
+    response=HttpResponse(content_type='image/png')
+    canvas.print_png(response)
+    plt.close(fig)
+    return response
