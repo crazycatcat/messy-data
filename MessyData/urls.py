@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^users/', include('users.urls',namespace='users')),
     url(r'',include('mainsite.urls',namespace='mainsite')),
+    #url(r'^users/',include('registration.backends.hmac.urls')),
 ]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 

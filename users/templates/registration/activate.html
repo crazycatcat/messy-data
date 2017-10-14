@@ -1,0 +1,22 @@
+{% extends "mainsite/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>医学数据统计分析平台</h2>
+{% endblock %}
+{% block content %}
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{message.tags}}'>{{ message }}</div>
+{% endfor %}
+<div class='row'>
+    <div class='col-md-12'>
+        <div class='panel panel-default'>
+            <div class='panel-heading' align=center>
+                <h3>启用失败，请检查您的启用链接，谢谢。</h3>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -134,6 +134,11 @@ BOOTSTRAP3={
     'include_jquery':True,
 }
 
+EMAIL_BACKEND='django_mailgun.MailgunBackend'
+MAILGUN_ACCESS_KEY='key-c5fd9b41cb4a8b13f14b12f1e1982310'
+MAILGUN_SERVER_NAME='sandbox6ecafc5efcc8443794d6ff0acde9e4a6.mailgun.org'
+ACCOUNT_ACTIVATION_DATS=7
+
 if os.getcwd()=='/app':
     import dj_database_url
     DATABASES={

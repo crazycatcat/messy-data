@@ -37,6 +37,10 @@ urlpatterns = [
 	url(r'^statistics/normtest/$',views.normtest,name='normtest'),
 	#normresult
 	url(r'^statistics/normresult/$',views.normresult,name='normresult'),
+	#sdtest
+	url(r'^statistics/sdtest/$',views.sdtest,name='sdtest'),
+	#sdtestresult
+	url(r'^statistics/sdtestresult/$',views.sdtestresult,name='sdtestresult'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs

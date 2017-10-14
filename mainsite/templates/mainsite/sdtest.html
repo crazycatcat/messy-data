@@ -1,7 +1,7 @@
 {% extends "mainsite/base.html" %}
 
 {% block header %}
-  <h1 style='font-family:微软雅黑'>一、描述性统计分析</h1>
+  <h1 style='font-family:微软雅黑'>三、计量资料参数检验的限制条件——方差齐性检验</h1>
 {% endblock %}
 
 {% block content %}
@@ -9,8 +9,11 @@
 <h3>
       <div class='container'>
 
-<form name='my form' action="{% url 'mainsite:result'   %}" method='GET'>
-    <textarea name='user_data' rows=3 cols=70></textarea><br/>
+<form name='my form' action="{% url 'mainsite:sdtestresult'   %}" method='GET'>
+    <h4>第一组数据：</h4>
+	<textarea name='user_data1' rows=3 cols=70></textarea><br/>
+	<h4>第二组数据：</h4>
+	<textarea name='user_data2' rows=3 cols=70></textarea><br/>
     <h4><input type='submit' value='提交'>
     <input type='reset' value='清除重填'></h4>
 </form>

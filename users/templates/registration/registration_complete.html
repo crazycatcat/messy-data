@@ -1,0 +1,24 @@
+{% extends "mainsite/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>注册账号</h2>
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{message.tags}}'>{{ message }}</div>
+{% endfor %}
+<div class='row'>
+    <div class='col-md-12'>
+        <div class='panel panel-default'>
+            <div class='panel-heading' align=center>
+                <h3>感谢您的注册</h3>
+                <p>接下来请别忘了到您注册的电子邮件中去验证并启用账号</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

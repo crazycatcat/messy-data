@@ -1,7 +1,7 @@
 {% extends "mainsite/base.html" %}
 
 {% block header %}
-  <h1 style='font-family:微软雅黑'>正态性检验结果：</h1>
+  <h1 style='font-family:微软雅黑'>方差齐性检验结果：</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,16 +10,21 @@
  <ul>
       <li>
         <h3 style='font-family:宋体'>
-         您的数据：{{ data }}<br/>
-		 (采用最常用的Kolmogorov-Smirnov 检验,pp图和qq图就不画了反正也只是看个大概，检验水准按照β=0.1)<br/>
+         您的数据：<br/>
+		 第一组：{{ data1 }}<br/>
+		 第二组：{{ data2 }}<br/>
+		 (采用Levene检验，检验水准按照β=0.1)<br/>
 		 最重要的我都标出来了。。。是不是好贴心？<br/>
 		 -------------------------------------------------------------------------------------<br/>
-		 Kolmogorov-Smirnov 检验的Z值：{{z}}<br/>
+		 Levene检验的F值：{{f}}<br/>
 		 *P值：{{p}}<br/>
 
          <script>
          if ({{p}}<0.1){
-         alert("不正态咯~哈哈哈哈哈哈")
+         alert("不！齐！……三缺一！")
+         }
+		 if ({{p}}>0.1){
+         alert("齐了！召唤神龙呗……")
          }
          </script>
 

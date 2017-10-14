@@ -28,7 +28,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.dates import DateFormatter
 import matplotlib.pyplot as plt
 
-from scipy.stats import kstest
+from scipy.stats import kstest,levene
 
 
 
@@ -212,3 +212,29 @@ def normresult(request):
     p=round(float(res[1]),4)
     context={'data':data,'z':z,'p':p}
     return render(request,'mainsite/normresult.html',context)
+	
+def sdtest(request):
+    return render(request,'mainsite/sdtest.html')
+	
+def sdtestresult(request):
+    requestData=request.GET.copy()
+    data1=requestData['user_data1']
+    data1=data1.encode('utf-8')
+    datanum1=[]
+    for i in data1.split(' '):
+	datanum1.append(int(i))
+    datanum1=list(datanum1)
+	
+    requestData=request.GET.copy()
+    data2=requestData['user_data2']
+    data2=data2.encode('utf-8')
+    datanum2=[]
+    for i in data2.split(' '):
+	datanum2.append(int(i))
+    datanum2=list(datanum2)
+	
+    res=levene(datanum1,datanum2,center = 'trimmed')
+    f=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data1':data1,'data2':data2,'f':f,'p':p}
+    return render(request,'mainsite/sdtestresult.html',context)
