@@ -1,0 +1,26 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>1.通过kNN（k-近领算法）让计算机从以往数据中学习并预测中风后的疗效等级（示例演示）</h2><br/>
+  <h4 style='font-family:宋体'>简介：kNN算法的基本原理其实就是勾股定理……此后省略一万字。本示例通过计算机学习一千例已有患者数据，研究中风患者<i><strong>患病前每年运动小时数、保持坐姿玩手机时间所占百分比</strong></i>和<i><strong>每周垃圾食品摄入量</strong></i>与<strong>患者治疗后疗效评定情况</strong>的关系。<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+  <h4 style='font-family:宋体'><i>说明：在自主上传数据开放以后，研究内容不仅限于中风这一个疾病，比如每周玩手机所占时间百分比、每年吃的冰淇淋量…和患二型糖尿病的关系危险等级</i><h4>
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <img src="{% static 'images/knn_example.PNG' %}" /><h5>……后省略</h5>
+	  <br/>
+	  <h4>我们首先将一千例病人数据随机抽取一百例保留为测试数据，其余九百例交由计算机学习。</h4>
+	  <h3><a href="{% url 'mainsite:knntest' %}" style='font-family:微软雅黑'>运行测试数据（需要注册登录）</a></h3>
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

@@ -29,6 +29,7 @@ from matplotlib.dates import DateFormatter
 import matplotlib.pyplot as plt
 
 from scipy.stats import kstest,levene
+from .knn import *
 
 
 
@@ -238,3 +239,25 @@ def sdtestresult(request):
     p=round(float(res[1]),4)
     context={'data1':data1,'data2':data2,'f':f,'p':p}
     return render(request,'mainsite/sdtestresult.html',context)
+	
+def knn(request):
+    return render(request,'mainsite/knn.html')
+
+@login_required
+def knntest(request):
+    errorCount,ds,erropercentage=datingClassTest()
+    context={'erropercentage':erropercentage,'ds':ds}
+    return render(request,'mainsite/knntest.html',context)
+
+@login_required
+def knntouch(request):
+    requestData=request.GET.copy()
+    ffMiles=requestData['hours']
+    iceCream=requestData['kgs']
+    percentTats=requestData['percentage']
+    ffMiles1=ffMiles.encode('utf-8')
+    iceCream1=iceCream.encode('utf-8')
+    percentTats1=percentTats.encode('utf-8')
+    res=classifyPerson(ffMiles1,iceCream1,percentTats1)
+    context={'res':res,'ffMiles1':ffMiles1,'iceCream1':iceCream1,'percentTats1':percentTats1}
+    return render(request,'mainsite/knntouch.html',context)

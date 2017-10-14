@@ -1,0 +1,35 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>kNN（k-近领算法）学习并预测中风后的疗效等级（示例演示）--测试运行结果</h2><br/>
+  <h4 style='font-family:宋体'>简介：kNN算法的基本原理其实就是勾股定理……此后省略一万字。本示例通过计算机学习一千例已有患者数据，研究中风患者<i><strong>患病前每年运动小时数、保持坐姿玩手机时间所占百分比</strong></i>和<i><strong>每周垃圾食品摄入量</strong></i>与<strong>患者治疗后疗效评定情况</strong>的关系。<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+  <h4 style='font-family:宋体'><i>说明：在自主上传数据开放以后，研究内容不仅限于中风这一个疾病，比如每周玩手机所占时间百分比、每年吃的冰淇淋量…和患二型糖尿病的关系危险等级</i><h4>
+{% endblock %}
+
+{% block content %}
+     <h3><strong>因为懒，下面的结果中3代表显效，2代表有效，1代表无效</strong>，最后给出了分类错误率，以及<strong><font color="red">交互式预测</strong></font>也就是说你可以输入一个刚入院病人的患病前每年运动小时数、保持坐姿玩手机时间所占百分比和每周垃圾食品摄入量，<strong>预测其治疗效果</strong>。</h3>
+    {% for d in ds %}
+        <h4 style='font-family:微软雅黑'>{{ d }}</h4>
+    {% endfor %}
+    <h3><strong>测试数据的分类错误率为：{{erropercentage}}%</strong>，远低于人类医生的误诊率。</h3>
+	
+	<h3>
+      <div class='container'>
+
+<form name='my form' action="{% url 'mainsite:knntouch'   %}" method='GET'>
+    <h4>患病前每年运动小时数：</h4>
+	<textarea name='hours' rows=1 cols=10></textarea><br/>
+	<h4>保持坐姿玩手机时间所占百分比：</h4>
+	<textarea name='percentage' rows=1 cols=10></textarea><br/>
+	<h4>每周垃圾食品摄入量：</h4>
+	<textarea name='kgs' rows=1 cols=10></textarea><br/>
+	
+    <h4><input type='submit' value='提交'>
+    <input type='reset' value='清除重填'></h4>
+</form>
+</div>
+
+</h3>
+
+
+{% endblock content %}

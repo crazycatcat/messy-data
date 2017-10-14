@@ -45,6 +45,12 @@ urlpatterns = [
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs
 	url(r'^datalabs/$',views.datalabs,name='datalabs'),
+	#kNN
+	url(r'^datalabs/knn/$',views.knn,name='knn'),
+	#kNNtest
+	url(r'^datalabs/knn/knntest$',views.knntest,name='knntest'),
+	#kNNtouch
+	url(r'^datalabs/knn/knntouch$',views.knntouch,name='knntouch'),
 ]
 
 

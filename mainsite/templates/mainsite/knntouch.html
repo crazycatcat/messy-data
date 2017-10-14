@@ -1,0 +1,15 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>kNN交互式预测结果</h1>
+{% endblock %}
+
+{% block content %}
+<h3 style='font-family:宋体'>您输入的患病前每年运动小时数：{{ffMiles1}}</h3>
+<h3 style='font-family:宋体'>保持坐姿玩手机时间所占百分比：{{percentTats1}}</h3>
+<h3 style='font-family:宋体'>每周垃圾食品摄入量(kg)：{{iceCream1}}</h3>
+<br/>
+<h3 style='font-family:微软雅黑'><strong>计算机预测该病人的治疗疗效为：<font color="red">{{res}}</font></strong></h3><br/>
+<h3 style='font-family:宋体'>虽然一千例已将本示例所运行的kNN分类器训练到错误率仅有4%左右，但示例所采纳的特征数较少，病例也才一千个，随着病例数和特征数的增加，模型预测效果会更佳。</h3>
+
+{% endblock content %}
