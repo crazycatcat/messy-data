@@ -9,10 +9,6 @@ psycopg2>=2.6.1
 numpy>=1.0.0
 matplotlib==2.1.0
 scipy==0.19.1
-certifi==2017.7.27.1
-chardet==3.0.4
-django-mailgun==0.9.1
-idna==2.6
-requests==2.18.4
-urllib3==1.22
+
+
 

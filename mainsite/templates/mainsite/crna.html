@@ -1,0 +1,20 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>3.RNA序列中碱基频率分析</h1>
+{% endblock %}
+
+{% block content %}
+<h4 style='font-family:宋体'>注意：字母大小写都行中间不间隔东西，<strong>因为不想写检查代码</strong>，不举例了。</h4>
+<h3>
+      <div class='container'>
+
+<form name='my form' action="{% url 'mainsite:crnares'   %}" method='GET'>
+    <textarea name='user_data' rows=3 cols=70></textarea><br/>
+    <h4><input type='submit' value='提交'>
+    <input type='reset' value='清除重填'></h4>
+</form>
+</div>
+
+</h3>
+{% endblock content %}

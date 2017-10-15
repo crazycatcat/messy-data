@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 
 from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind
 from .knn import *
-
+from .biologists import *
 
 
 # Create your views here.
@@ -364,3 +364,39 @@ def attestres(request):
     p=round(float(res[1]),4)
     context={'data1':data1,'data2':data2,'t':t,'p':p}
     return render(request,'mainsite/attestres.html',context)
+	
+def caa(request):
+    return render(request,'mainsite/caa.html')
+
+def caares(request):
+    requestData=request.GET.copy()
+    seq=requestData['user_data']
+    seq=seq.encode('utf-8')
+    seq=seq.upper()
+    ress=count_aminoacids(seq)
+    context={'seq':seq,'ress':ress}
+    return render(request,'mainsite/caares.html',context)
+	
+def cdna(request):
+    return render(request,'mainsite/cdna.html')
+
+def cdnares(request):
+    requestData=request.GET.copy()
+    seq=requestData['user_data']
+    seq=seq.encode('utf-8')
+    seq=seq.upper()
+    ress=count_dna(seq)
+    context={'seq':seq,'ress':ress}
+    return render(request,'mainsite/cdnares.html',context)
+	
+def crna(request):
+    return render(request,'mainsite/crna.html')
+
+def crnares(request):
+    requestData=request.GET.copy()
+    seq=requestData['user_data']
+    seq=seq.encode('utf-8')
+    seq=seq.upper()
+    ress=count_rna(seq)
+    context={'seq':seq,'ress':ress}
+    return render(request,'mainsite/crnares.html',context)

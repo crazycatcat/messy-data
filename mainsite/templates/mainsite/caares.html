@@ -1,0 +1,15 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>蛋白质序列中的氨基酸频率计算结果：</h2><br/>
+{% endblock %}
+
+{% block content %}
+<h4>你输入的数据：{{seq}}</h4>
+    {% for res in ress %}
+        <h4 style='font-family:微软雅黑'>{{ res }}</h4>
+    {% endfor %}
+    
+
+
+{% endblock content %}

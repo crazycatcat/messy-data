@@ -7,9 +7,14 @@
 {% block content %}
 
 <h3>
-      <p>一、机器学习——k-近领算法</p>
+      <p>一、机器学习</p>
 	  <h4><a href="{% url 'mainsite:knn'   %}" style='font-family:宋体'>1.通过kNN（k-近领算法）让计算机从以往数据中学习并预测中风后的疗效等级（示例演示）</a></h4>
-	  <h4 style='font-family:宋体'>2.上传你的数据进行学习预测(暂未开放）</h4>
+	  <h4 style='font-family:宋体'>2.上传你的数据进行学习预测(暂未开放）</h4><br/>
+	  <h3>二、科研利器</h3>
+	  <h4><a href="{% url 'mainsite:caa'   %}" style='font-family:宋体'>1.计算蛋白质序列中的氨基酸频率</a></h4>
+	  <h4><a href="{% url 'mainsite:cdna'   %}" style='font-family:宋体'>2.DNA序列中碱基频率分析</a></h4>
+	  <h4><a href="{% url 'mainsite:crna'   %}" style='font-family:宋体'>3.RNA序列中碱基频率分析</a></h4>
+	  
 	  
 </h3>
 {% endblock content %}
