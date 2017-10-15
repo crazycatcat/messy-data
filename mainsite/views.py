@@ -364,10 +364,12 @@ def attestres(request):
     p=round(float(res[1]),4)
     context={'data1':data1,'data2':data2,'t':t,'p':p}
     return render(request,'mainsite/attestres.html',context)
-	
+
+@login_required
 def caa(request):
     return render(request,'mainsite/caa.html')
 
+@login_required
 def caares(request):
     requestData=request.GET.copy()
     seq=requestData['user_data']
@@ -377,9 +379,11 @@ def caares(request):
     context={'seq':seq,'ress':ress}
     return render(request,'mainsite/caares.html',context)
 	
+@login_required
 def cdna(request):
     return render(request,'mainsite/cdna.html')
 
+@login_required
 def cdnares(request):
     requestData=request.GET.copy()
     seq=requestData['user_data']
@@ -388,10 +392,12 @@ def cdnares(request):
     ress=count_dna(seq)
     context={'seq':seq,'ress':ress}
     return render(request,'mainsite/cdnares.html',context)
-	
+
+@login_required
 def crna(request):
     return render(request,'mainsite/crna.html')
 
+@login_required
 def crnares(request):
     requestData=request.GET.copy()
     seq=requestData['user_data']
