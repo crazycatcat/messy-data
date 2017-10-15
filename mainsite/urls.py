@@ -41,6 +41,22 @@ urlpatterns = [
 	url(r'^statistics/sdtest/$',views.sdtest,name='sdtest'),
 	#sdtestresult
 	url(r'^statistics/sdtestresult/$',views.sdtestresult,name='sdtestresult'),
+	#dttest
+	url(r'^statistics/dttest/$',views.dttest,name='dttest'),
+	#dttestres
+	url(r'^statistics/dttestres/$',views.dttestres,name='dttestres'),
+	#pttest
+	url(r'^statistics/pttest/$',views.pttest,name='pttest'),
+	#pttestres
+	url(r'^statistics/pttestres/$',views.pttestres,name='pttestres'),
+	#upttest
+	url(r'^statistics/upttest/$',views.upttest,name='upttest'),
+	#upttestres
+	url(r'^statistics/upttestres/$',views.upttestres,name='upttestres'),
+	#attest
+	url(r'^statistics/attest/$',views.attest,name='attest'),
+	#attestres
+	url(r'^statistics/attestres/$',views.attestres,name='attestres'),
 	#Dataminings
 	url(r'^dataminings/$',views.dataminings,name='dataminings'),
 	#Datalabs

@@ -46,7 +46,7 @@ def autoNorm(dataSet):
 
 def datingClassTest():
     hoRatio=0.10
-    datingDataMat,datingLabels=file2matrix('mainsite/static/files/datingTestSet2.txt')
+    datingDataMat,datingLabels=file2matrix('mainsite/static/files/knndata2.txt')
     normMat,ranges,minVals=autoNorm(datingDataMat)
     m=normMat.shape[0]
     numTestVecs=int(m*hoRatio)
@@ -66,7 +66,7 @@ def classifyPerson(ffMiles,iceCream,percentTats):
     percentTats=float(percentTats)
     ffMiles=float(ffMiles)
     iceCream=float(iceCream)
-    datingDataMat,datingLabels=file2matrix('mainsite/static/files/datingTestSet2.txt')
+    datingDataMat,datingLabels=file2matrix('mainsite/static/files/knndata2.txt')
     normMat,ranges,minVals=autoNorm(datingDataMat)
     inArr=array([ffMiles,percentTats,iceCream])
     classifierResult=classify0((inArr-minVals)/ranges,normMat,datingLabels,5)

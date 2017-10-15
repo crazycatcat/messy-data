@@ -1,0 +1,25 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>校正t检验结果：</h1>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+ <ul>
+      <li>
+        <h3 style='font-family:宋体'>
+         第一组数据：{{ data1 }}<br/>
+		 第二组数据：{{ data2 }}<br/>
+		 最重要的我都标出来了。。。是不是好贴心？<br/>
+		 -------------------------------------------------------------------------------------<br/>
+		 校正t检验t值：{{t}}<br/>
+		 *P值：{{p}}<br/>
+
+         
+        </h3>
+      </li>
+  </ul>
+</h3>
+{% endblock content %}

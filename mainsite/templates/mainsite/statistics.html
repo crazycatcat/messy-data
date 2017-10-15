@@ -6,10 +6,17 @@
 
 {% block content %}
 
-<h3>
-      <a href="{% url 'mainsite:desstat'   %}" style='font-family:宋体'>一、描述性统计分析</a><br/>
-	  <a href="{% url 'mainsite:normtest'   %}" style='font-family:宋体'>二、计量资料参数检验的前提——正态性检验</a><br/>
-	  <a href="{% url 'mainsite:sdtest'   %}" style='font-family:宋体'>三、计量资料参数检验的限制条件——方差齐性检验</a>
+<h3 style='font-family:宋体'>
+      <li><p><a href="{% url 'mainsite:desstat'   %}">一、描述性统计分析</a></p></li>
+	  <li><p><a href="{% url 'mainsite:normtest'   %}">二、计量资料参数检验的前提——正态性检验</a></p></li>
+	  <li><p><a href="{% url 'mainsite:sdtest'   %}">三、计量资料参数检验的限制条件——方差齐性检验</a></p></li>
+	  <li>四、计量资料的参数检验——t检验<p></li>
+	  <a href="{% url 'mainsite:dttest'   %}">1.单样本t检验</a><br/>
+	  <a href="{% url 'mainsite:pttest'   %}">2.配对样本t检验</a><br/>
+	  <a href="{% url 'mainsite:upttest'   %}">3.成组t检验</a><br/>
+	  <a href="{% url 'mainsite:attest'   %}">4.方差不齐时的校正t检验</a><br/>
+
+
 	  
 </h3>
 {% endblock content %}

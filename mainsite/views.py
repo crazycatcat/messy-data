@@ -28,7 +28,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.dates import DateFormatter
 import matplotlib.pyplot as plt
 
-from scipy.stats import kstest,levene
+from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind
 from .knn import *
 
 
@@ -261,3 +261,106 @@ def knntouch(request):
     res=classifyPerson(ffMiles1,iceCream1,percentTats1)
     context={'res':res,'ffMiles1':ffMiles1,'iceCream1':iceCream1,'percentTats1':percentTats1}
     return render(request,'mainsite/knntouch.html',context)
+	
+def dttest(request):
+    return render(request,'mainsite/dttest.html')
+	
+def dttestres(request):
+    requestData=request.GET.copy()
+    data1=requestData['user_data1']
+    data1=data1.encode('utf-8')
+    datanum1=[]
+    for i in data1.split(' '):
+	datanum1.append(int(i))
+    datanum1=list(datanum1)
+	
+    requestData=request.GET.copy()
+    data2=requestData['user_data2']
+    data2=data2.encode('utf-8')
+    datanum2=[]
+    datanum2.append(int(data2))
+    datanum2=list(datanum2)
+    
+    res=ttest_1samp(datanum1,popmean=datanum2)
+    t=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data1':data1,'data2':data2,'t':t,'p':p}
+    return render(request,'mainsite/dttestres.html',context)
+	
+def pttest(request):
+    return render(request,'mainsite/pttest.html')
+	
+def pttestres(request):
+    requestData=request.GET.copy()
+    data1=requestData['user_data1']
+    data1=data1.encode('utf-8')
+    datanum1=[]
+    for i in data1.split(' '):
+	datanum1.append(int(i))
+    datanum1=list(datanum1)
+	
+    requestData=request.GET.copy()
+    data2=requestData['user_data2']
+    data2=data2.encode('utf-8')
+    datanum2=[]
+    for i in data2.split(' '):
+	datanum2.append(int(i))
+    datanum2=list(datanum2)
+    
+    res=ttest_rel(datanum1,datanum2)
+    t=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data1':data1,'data2':data2,'t':t,'p':p}
+    return render(request,'mainsite/pttestres.html',context)
+	
+def upttest(request):
+    return render(request,'mainsite/upttest.html')
+	
+def upttestres(request):
+    requestData=request.GET.copy()
+    data1=requestData['user_data1']
+    data1=data1.encode('utf-8')
+    datanum1=[]
+    for i in data1.split(' '):
+	datanum1.append(int(i))
+    datanum1=list(datanum1)
+	
+    requestData=request.GET.copy()
+    data2=requestData['user_data2']
+    data2=data2.encode('utf-8')
+    datanum2=[]
+    for i in data2.split(' '):
+	datanum2.append(int(i))
+    datanum2=list(datanum2)
+    
+    res=ttest_ind(datanum1,datanum2)
+    t=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data1':data1,'data2':data2,'t':t,'p':p}
+    return render(request,'mainsite/upttestres.html',context)
+	
+def attest(request):
+    return render(request,'mainsite/attest.html')
+	
+def attestres(request):
+    requestData=request.GET.copy()
+    data1=requestData['user_data1']
+    data1=data1.encode('utf-8')
+    datanum1=[]
+    for i in data1.split(' '):
+	datanum1.append(int(i))
+    datanum1=list(datanum1)
+	
+    requestData=request.GET.copy()
+    data2=requestData['user_data2']
+    data2=data2.encode('utf-8')
+    datanum2=[]
+    for i in data2.split(' '):
+	datanum2.append(int(i))
+    datanum2=list(datanum2)
+    
+    res=ttest_ind(datanum1,datanum2,equal_var=False)
+    t=round(float(res[0]),4)
+    p=round(float(res[1]),4)
+    context={'data1':data1,'data2':data2,'t':t,'p':p}
+    return render(request,'mainsite/attestres.html',context)
