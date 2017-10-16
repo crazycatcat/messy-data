@@ -31,6 +31,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_contingency,fisher_exact
 from .knn import *
 from .biologists import *
+from .apriori import *
 
 
 # Create your views here.
@@ -450,3 +451,32 @@ def fisherres(request):
     p=round(res[1],4)
     context={'t':t,'oddsratio':oddsratio,'p':p}
     return render(request,'mainsite/fisherres.html',context)
+	
+def apdie(request):
+    return render(request,'mainsite/apdie.html')
+	
+def apdieres(request):
+    '''apdieDataSet=[line.split('\t') for line in open('mainsite/static/files/apdie.txt').readlines()] '''
+    apdieDataSet=[]
+    with open('mainsite/static/files/apdie.csv') as f:
+        for line in f.readlines():
+            line=unicode(line,"utf8")
+            line=line.strip('\n')
+            line=line.split(',')
+            apdieDataSet.append(line)
+    L,suppData=apriori(apdieDataSet,minSupport=0.3)
+    res2s=[]
+    for item in L[1]:
+	if item.intersection(['死亡']):
+	    res2s.append(item)
+    res3s=[]
+    for item in L[2]:
+	if item.intersection(['死亡']):
+	    res3s.append(item)
+    res4s=[]
+    for item in L[3]:
+	if item.intersection(['死亡']):
+	    res4s.append(item)
+    context={'res2s':res2s,'res3s':res3s,'res4s':res4s}
+    #context={'apdieDataSet':apdieDataSet[0]}
+    return render(request,'mainsite/apdieres.html',context)
