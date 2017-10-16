@@ -452,11 +452,11 @@ def fisherres(request):
     context={'t':t,'oddsratio':oddsratio,'p':p}
     return render(request,'mainsite/fisherres.html',context)
 	
-def apdie(request):
+'''def apdie(request):
     return render(request,'mainsite/apdie.html')
 	
 def apdieres(request):
-    '''apdieDataSet=[line.split('\t') for line in open('mainsite/static/files/apdie.txt').readlines()] '''
+    #apdieDataSet=[line.split('\t') for line in open('mainsite/static/files/apdie.txt').readlines()] 
     apdieDataSet=[]
     with open('mainsite/static/files/apdie.csv') as f:
         for line in f.readlines():
@@ -479,4 +479,4 @@ def apdieres(request):
 	    res4s.append(item)
     context={'res2s':res2s,'res3s':res3s,'res4s':res4s}
     #context={'apdieDataSet':apdieDataSet[0]}
-    return render(request,'mainsite/apdieres.html',context)
+    return render(request,'mainsite/apdieres.html',context)'''

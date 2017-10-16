@@ -76,9 +76,9 @@ urlpatterns = [
     #kNNtouch
     url(r'^datalabs/knn/knntouch$',views.knntouch,name='knntouch'),
     #apdie
-    url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
+    #url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
     #apdieres
-    url(r'^datalabs/apdie/apdieres/$',views.apdieres,name='apdieres'),
+    #url(r'^datalabs/apdie/apdieres/$',views.apdieres,name='apdieres'),
     #caa
     url(r'^datalabs/caa/$',views.caa,name='caa'),
     #caares
