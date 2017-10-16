@@ -28,7 +28,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.dates import DateFormatter
 import matplotlib.pyplot as plt
 
-from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind
+from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_contingency,fisher_exact
 from .knn import *
 from .biologists import *
 
@@ -406,3 +406,47 @@ def crnares(request):
     ress=count_rna(seq)
     context={'seq':seq,'ress':ress}
     return render(request,'mainsite/crnares.html',context)
+	
+def chiq(request):
+    return render(request,'mainsite/chiq.html')
+	
+def chiqres(request):
+    requestData=request.GET.copy()
+    a=requestData['a'].encode('utf-8')
+    b=requestData['b'].encode('utf-8')
+    c=requestData['c'].encode('utf-8')
+    d=requestData['d'].encode('utf-8')
+    a,b,c,d,=int(a),int(b),int(c),int(d)
+    l=[a+c,b+d]
+    l2=[a+b,c+d]
+    t=round((float(min(l)*min(l2))/(a+b+c+d)),2)
+    
+    d=np.array([[a,b],[c,d]])
+    res=chi2_contingency(d,correction=False)
+    x2=round(res[0],4)
+    p=round(res[1],4)
+    context={'t':t,'x2':x2,'p':p}
+    return render(request,'mainsite/chiqres.html',context)
+	
+def fisher(request):
+    return render(request,'mainsite/fisher.html')
+	
+def fisherres(request):
+    requestData=request.GET.copy()
+    a=requestData['a'].encode('utf-8')
+    b=requestData['b'].encode('utf-8')
+    c=requestData['c'].encode('utf-8')
+    d=requestData['d'].encode('utf-8')
+    a,b,c,d,=int(a),int(b),int(c),int(d)
+    l=[a+c,b+d]
+    l2=[a+b,c+d]
+    t=round((float(min(l)*min(l2))/(a+b+c+d)),2)
+    f1=[a,b]
+    f2=[c,d]
+    res=fisher_exact([f1,f2])
+    #d=np.array([[a,b],[c,d]])
+    #res=chi2_contingency(d)
+    oddsratio=round(res[0],4)
+    p=round(res[1],4)
+    context={'t':t,'oddsratio':oddsratio,'p':p}
+    return render(request,'mainsite/fisherres.html',context)

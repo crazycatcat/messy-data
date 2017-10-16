@@ -57,6 +57,14 @@ urlpatterns = [
     url(r'^statistics/attest/$',views.attest,name='attest'),
     #attestres
     url(r'^statistics/attestres/$',views.attestres,name='attestres'),
+    #chiq
+    url(r'^statistics/chiq/$',views.chiq,name='chiq'),
+    #chiqres
+    url(r'^statistics/chiqres/$',views.chiqres,name='chiqres'),
+    #fisher
+    url(r'^statistics/fisher/$',views.fisher,name='fisher'),
+    #fisherres
+    url(r'^statistics/fisherres/$',views.fisherres,name='fisherres'),
     #Dataminings
     url(r'^dataminings/$',views.dataminings,name='dataminings'),
     #Datalabs

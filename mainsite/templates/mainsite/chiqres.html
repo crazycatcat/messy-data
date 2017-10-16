@@ -1,0 +1,30 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>四格表卡方检验结果：</h1>
+{% endblock %}
+
+{% block content %}
+
+<h3>
+ <ul>
+      <li>
+        <h3 style='font-family:宋体'>
+         *最小理论频数T={{t}}<br/>
+		 最重要的我都标出来了。。。是不是好贴心？<br/>
+		 -------------------------------------------------------------------------------------<br/>
+		 卡方值：{{x2}}<br/>
+		 *P值：{{p}}<br/>
+		 <script>
+         if ({{t}}<5){
+         alert("最小理论频数小于5啦~")
+         }
+		
+         </script>
+
+         
+        </h3>
+      </li>
+  </ul>
+</h3>
+{% endblock content %}

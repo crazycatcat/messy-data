@@ -1,0 +1,33 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>1.四格表卡方检验</h1>
+{% endblock %}
+
+{% block content %}
+<h4 style='font-family:宋体'>注意：请先确定你的数据是无序的。</h4>
+<h3>
+      <div class='container'>
+
+<form name='my form' action="{% url 'mainsite:chiqres'   %}" method='GET'>
+	<table border="1">
+<tr>
+<th></th>
+<th>阳性</th>
+<th>阴性</th>
+</tr>
+<td>第一组</td><td><textarea name='a' rows=1 cols=10></textarea></td>
+<td><textarea name='b' rows=1 cols=10></textarea></td>
+</tr>
+<tr>
+<td>第二组</td><td><textarea name='c' rows=1 cols=10></textarea></td>
+<td><textarea name='d' rows=1 cols=10></textarea></td>
+</tr>
+</table>
+    <h4><input type='submit' value='提交'>
+    <input type='reset' value='清除重填'></h4>
+</form>
+</div> 
+
+</h3>
+{% endblock content %}
