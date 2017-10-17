@@ -455,6 +455,7 @@ def fisherres(request):
 def apdie(request):
     return render(request,'mainsite/apdie.html')
 	
+@login_required
 def apdieres(request):
     apdieDataSet=[line.split(',') for line in open('mainsite/static/files/apdie.csv').readlines()]
     '''apdieDataSet=[]
@@ -484,6 +485,7 @@ def apdieres(request):
 def appoint(request):
     return render(request,'mainsite/appoint.html')
 	
+@login_required
 def appointres(request):
     appointDataSet=[line.split(',') for line in open('mainsite/static/files/appoint.csv').readlines()]
     '''apdieDataSet=[]
