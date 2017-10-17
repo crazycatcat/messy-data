@@ -1,0 +1,35 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>通过Apriori算法对卒中住院患者死亡危险因素分析（示例演示）结果：</h2><br/>
+  <h4 style='font-family:宋体'>简介：Apriori算法的基本原理是寻找频繁集项……此后省略一万字。本示例通过计算机学习1143例已有数据，研究针灸治疗痤疮<strong>选穴规律</strong>。<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+  <h4 style='font-family:宋体'><strong>说明：本示例所设置支持度和信度都较高所以一下难免就几个穴位来来回回，每一行末尾数字为信度。在文末有调低支持度所得结果(结论较多且庞杂并不利于选穴规律分析。</strong><h4>
+{% endblock %}
+
+{% block content %}
+
+     <h3>最常用的<strong>两穴组合</strong>。
+    {% for rule in rules2 %}
+        <h4 style='font-family:微软雅黑'>{{ rule }}</h4>
+    {% endfor %}<br/>
+      <h4 style='font-family:微软雅黑'>针灸治疗痤疮最常用的两穴组合为：中脘+合谷、中脘+足三里、天枢+合谷、足三里+天枢、足三里+合谷、中脘+天枢</h4><br/>
+    <h3>最常用的<strong>三穴组合</strong>。
+    {% for rule in rules3 %}
+        <h4 style='font-family:微软雅黑'>{{ rule }}</h4>
+    {% endfor %}<br/>
+    <h4 style='font-family:微软雅黑'>针灸治疗痤疮最常用的三穴组合为：足三里+合谷+天枢、天枢+合谷+中脘、中脘+足三里+天枢、足三里+合谷+中脘</h4><br/>
+	<h3>最常用的<strong>四穴组合</strong>。
+    {% for rule in rules4 %}
+        <h4 style='font-family:微软雅黑'>{{ rule }}</h4>
+    {% endfor %}<br/>
+	<h4 style='font-family:微软雅黑'>针灸治疗痤疮最常用的四穴组合为：足三里+合谷+天枢+中脘</h4><br/>
+	<h3 style='font-family:微软雅黑'>调低支持度后所得结果：</h3><br/>
+	{% for rule in rules1 %}
+        <h4 style='font-family:微软雅黑'>{{ rule }}</h4>
+    {% endfor %}<br/>
+
+
+ 
+
+
+{% endblock content %}

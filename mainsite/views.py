@@ -452,31 +452,51 @@ def fisherres(request):
     context={'t':t,'oddsratio':oddsratio,'p':p}
     return render(request,'mainsite/fisherres.html',context)
 	
-'''def apdie(request):
+def apdie(request):
     return render(request,'mainsite/apdie.html')
 	
 def apdieres(request):
-    #apdieDataSet=[line.split('\t') for line in open('mainsite/static/files/apdie.txt').readlines()] 
-    apdieDataSet=[]
+    apdieDataSet=[line.split(',') for line in open('mainsite/static/files/apdie.csv').readlines()]
+    '''apdieDataSet=[]
     with open('mainsite/static/files/apdie.csv') as f:
         for line in f.readlines():
-            line=unicode(line,"utf8")
+            #line=unicode(line,"utf8")
             line=line.strip('\n')
             line=line.split(',')
-            apdieDataSet.append(line)
+            apdieDataSet.append(line)'''
     L,suppData=apriori(apdieDataSet,minSupport=0.3)
     res2s=[]
     for item in L[1]:
-	if item.intersection(['死亡']):
+	if item.intersection(['Death']):
 	    res2s.append(item)
     res3s=[]
     for item in L[2]:
-	if item.intersection(['死亡']):
+	if item.intersection(['Death']):
 	    res3s.append(item)
     res4s=[]
     for item in L[3]:
-	if item.intersection(['死亡']):
+	if item.intersection(['Death']):
 	    res4s.append(item)
     context={'res2s':res2s,'res3s':res3s,'res4s':res4s}
     #context={'apdieDataSet':apdieDataSet[0]}
-    return render(request,'mainsite/apdieres.html',context)'''
+    return render(request,'mainsite/apdieres.html',context)
+
+def appoint(request):
+    return render(request,'mainsite/appoint.html')
+	
+def appointres(request):
+    appointDataSet=[line.split(',') for line in open('mainsite/static/files/appoint.csv').readlines()]
+    '''apdieDataSet=[]
+    with open('mainsite/static/files/apdie.csv') as f:
+        for line in f.readlines():
+            #line=unicode(line,"utf8")
+            line=line.strip('\n')
+            line=line.split(',')
+            apdieDataSet.append(line)'''
+    L,suppData=apriori(appointDataSet,minSupport=0.6)
+    rules=generateRules(L,suppData,minConf=0.5)
+    L1,suppData1=apriori(appointDataSet,minSupport=0.4)
+    rules1=generateRules(L1,suppData1,minConf=0.4)
+    context={'rules2':rules[:12],'rules3':rules[12:24],'rules4':rules[24:],'rules1':rules1}
+    #context={'apdieDataSet':apdieDataSet[0]}
+    return render(request,'mainsite/appointres.html',context)
