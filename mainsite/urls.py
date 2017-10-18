@@ -75,6 +75,10 @@ urlpatterns = [
     url(r'^datalabs/knn/knntest$',views.knntest,name='knntest'),
     #kNNtouch
     url(r'^datalabs/knn/knntouch$',views.knntouch,name='knntouch'),
+    #id3
+    url(r'^datalabs/id3/$',views.id3,name='id3'),
+    #id3res
+    url(r'^datalabs/id3/id3res/$',views.id3res,name='id3res'),
     #apdie
     url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
     #apdieres

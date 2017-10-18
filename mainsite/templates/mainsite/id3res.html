@@ -1,0 +1,29 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>ID3决策树对名老中医治疗感冒君药选择规律研究（示例演示）结果：</h2><br/>
+  <h4 style='font-family:宋体'>简介：ID3决策树算法的基本原理是让计算机不断模拟人类做选择题……此后省略一万字。本示例通过ID3决策树算法让计算机模拟名老中医治疗感冒时选择君药的思维模式，研究其规律。<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+
+     <h3>计算机所的出规律：</h3>
+    
+        <h4 style='font-family:微软雅黑'>{{ lt }}</h4><br/>
+	<h3>结果可视化：</h3>
+	{% load staticfiles %}
+      <img src="{% static 'images/decTree1.png' %}" />
+	  
+	  
+	  
+	  <h3 style='font-family:微软雅黑'><strong><font color="red">彩蛋：</font></strong></h3><br/>
+	  <h2 style='font-family:微软雅黑'><strong>本示例所挖掘的名老中医姓——<font color="red">罗</font></strong></h2><br/>
+
+
+
+
+ 
+
+
+{% endblock content %}

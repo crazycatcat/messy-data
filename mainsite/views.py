@@ -32,6 +32,7 @@ from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_conti
 from .knn import *
 from .biologists import *
 from .apriori import *
+import codecs,decTree
 
 
 # Create your views here.
@@ -502,3 +503,36 @@ def appointres(request):
     context={'rules2':rules[:12],'rules3':rules[12:24],'rules4':rules[24:],'rules1':rules1}
     #context={'apdieDataSet':apdieDataSet[0]}
     return render(request,'mainsite/appointres.html',context)
+	
+def id3(request):
+    return render(request,'mainsite/id3.html')
+	
+@login_required
+def id3res(request):
+    #apdieDataSet=[line.split(',') for line in open('mainsite/static/files/id3.txt').readlines()]
+   
+    lense=[]
+    with codecs.open('mainsite/static/files/id3.txt','r','utf-8') as f:
+#with open('lensess.txt') as f:
+        for line in f.readlines():
+        
+            line=line.strip()
+        
+        #line=unicode(line,"utf8")
+        #line=line.decode('ascii')
+        #line=line.encode("utf-8")
+        
+            line=line.split('\t')
+        
+            lense.append(line)
+        
+
+
+
+    ll=[u'年龄',u'舌苔',u'是否有汗',u'是否畏寒']
+    lt=decTree.createTree(lense,ll)
+    lt=str(lt).replace('u\'','\'')
+    lt=lt.decode("unicode-escape")
+    context={'lt':lt}
+    #context={'apdieDataSet':apdieDataSet[0]}
+    return render(request,'mainsite/id3res.html',context)
