@@ -583,15 +583,12 @@ def knnupres(request):
     if request.method == 'POST':
         
         
-        x=open('x.txt','wb+')
-        wb=request.FILES['knnfile']
-        for line in wb:
-            x.write(line)
-        #print wb,x
-        #return HttpResponse('ok')
         
-        errorCount,ds,erropercentage=knnUpClassTest('x.txt')
-        context={'erropercentage':erropercentage,'ds':ds}
+        wb=request.FILES['knnfile']
+        
+    
+        errorCount,d,erropercentage=knnUpClassTest(wb)
+        context={'erropercentage':erropercentage,'d':d}
         
         return render(request,'mainsite/knnupres.html',context)
     else:

@@ -73,9 +73,26 @@ def classifyPerson(ffMiles,iceCream,percentTats):
     res=resultList[classifierResult-1]
     return res
 
+def file2matrix1(file):
+    #fr=open(filename)
+    arrayOLines=file.readlines()
+    numberOfLines=len(arrayOLines)
+    returnMat=zeros((numberOfLines,3))
+    classLabelVector=[]
+    index=0
+    for line in arrayOLines:
+        line=line.strip()
+        listFromLine=line.split('\t')
+        returnMat[index,:]=listFromLine[0:3]
+        classLabelVector.append(int(listFromLine[-1]))
+        index+=1
+    return returnMat,classLabelVector
+
+
+
 def knnUpClassTest(file):
     hoRatio=0.10
-    datingDataMat,datingLabels=file2matrix(file)
+    datingDataMat,datingLabels=file2matrix1(file)
     normMat,ranges,minVals=autoNorm(datingDataMat)
     m=normMat.shape[0]
     numTestVecs=int(m*hoRatio)
