@@ -76,6 +76,7 @@ def classifyPerson(ffMiles,iceCream,percentTats):
 def file2matrix1(file):
     #fr=open(filename)
     arrayOLines=file.readlines()
+    
     numberOfLines=len(arrayOLines)
     returnMat=zeros((numberOfLines,3))
     classLabelVector=[]
