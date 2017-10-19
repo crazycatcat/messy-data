@@ -582,30 +582,13 @@ def knnup(request):
 def knnupres(request):
     if request.method == 'POST':
         
-        '''knnfile = request.FILES.get('knnfile', None)
-        print knnfile
-        wb = open( knnfile.name, 'wb+')
-        print wb'''
         
-        #for chunk in knnfile.chunks():
-        #    wb.write(chunk)
-        #f=open(request.FILES['knnfile'], None)
-        #wb = open(filename='knnfile.txt', file_contents=request.FILES['knnfile'])#.read().replace('\r', ''),'wb'
-        #wb=wb.replace('\n', '')
-        #f=xlrd.open_workbook(filename=None, file_contents=request.FILES['knnfile'].read())
         x=open('x.txt','wb+')
         wb=request.FILES['knnfile']
         for chunk in wb.chunks():
             x.write(chunk)
         
-        #f=f.write(wb)
-        #f=request.FILES['knnfile'].read()
-        #wb=wb.write(copy.deepcopy(f))
-        #f=xlrd.open_workbook(filename=None, file_contents=request.FILES['knnfile'].read())
-       # wb=copy.deepcopy(f.read())
-        #wb=f.sheets()[0]
-        #print wb,x
-        #return HttpResponse('ok')
+        
         errorCount,ds,erropercentage=knnUpClassTest('x.txt')
         context={'erropercentage':erropercentage,'ds':ds}
         
