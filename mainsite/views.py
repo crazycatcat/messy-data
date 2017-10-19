@@ -585,9 +585,10 @@ def knnupres(request):
         
         x=open('x.txt','wb+')
         wb=request.FILES['knnfile']
-        for chunk in wb.chunks():
-            x.write(chunk)
-        
+        for line in wb:
+            x.write(line)
+        #print wb,x
+        #return HttpResponse('ok')
         
         errorCount,ds,erropercentage=knnUpClassTest('x.txt')
         context={'erropercentage':erropercentage,'ds':ds}
