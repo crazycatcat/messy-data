@@ -32,8 +32,9 @@ from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_conti
 from .knn import *
 from .biologists import *
 from .apriori import *
-import codecs,decTree,os
-import xlrd
+import codecs,decTree
+import xlrd,copy
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 # Create your views here.
@@ -580,31 +581,34 @@ def knnup(request):
 @login_required
 def knnupres(request):
     if request.method == 'POST':
-        '''ret = {'status': False, 'data': None, 'error': None}
-        try:
-            knnfile = request.FILES.get('knnfile', None)
-            f = open(os.path.join('mainsite/static/userfile', knnfile.name), 'wb+')
-            for chunk in knnfile.chunks():
-                f.write(chunk)
-            ret['status'] = True
-            ret['data'] = os.path.join('static',knnfile.name)
-        except Exception as e:
-            ret['error'] = e
-        finally:
-            errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfile/'+knnfile.name))
-            context={'erropercentage':erropercentage,'ds':ds}
-            f.close()
-            return render(request,'mainsite/knnupres.html',context)
-    return render(request, 'mainsite/knnup.html')'''
-        knnfile = request.FILES.get('knnfile', None)
-        f = open(os.path.join('mainsite/static/userfiles/', knnfile.name), 'wb+')
-        for chunk in knnfile.chunks():
-            f.write(chunk)
-        errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfiles/'+knnfile.name))
+        
+        '''knnfile = request.FILES.get('knnfile', None)
+        print knnfile
+        wb = open( knnfile.name, 'wb+')
+        print wb'''
+        
+        #for chunk in knnfile.chunks():
+        #    wb.write(chunk)
+        #f=open(request.FILES['knnfile'], None)
+        #wb = open(filename='knnfile.txt', file_contents=request.FILES['knnfile'])#.read().replace('\r', ''),'wb'
+        #wb=wb.replace('\n', '')
+        #f=xlrd.open_workbook(filename=None, file_contents=request.FILES['knnfile'].read())
+        x=open('x.txt','wb+')
+        wb=request.FILES['knnfile']
+        for chunk in wb.chunks():
+            x.write(chunk)
+        
+        #f=f.write(wb)
+        #f=request.FILES['knnfile'].read()
+        #wb=wb.write(copy.deepcopy(f))
+        #f=xlrd.open_workbook(filename=None, file_contents=request.FILES['knnfile'].read())
+       # wb=copy.deepcopy(f.read())
+        #wb=f.sheets()[0]
+        #print wb,x
+        #return HttpResponse('ok')
+        errorCount,ds,erropercentage=knnUpClassTest('x.txt')
         context={'erropercentage':erropercentage,'ds':ds}
-        f.close()
-        os.remove(os.path.join('mainsite/static/userfiles/', knnfile.name))
+        
         return render(request,'mainsite/knnupres.html',context)
     else:
         return render(request, 'mainsite/knnup.html')
-
