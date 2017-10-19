@@ -72,3 +72,20 @@ def classifyPerson(ffMiles,iceCream,percentTats):
     classifierResult=classify0((inArr-minVals)/ranges,normMat,datingLabels,5)
     res=resultList[classifierResult-1]
     return res
+
+def knnUpClassTest(file):
+    hoRatio=0.10
+    datingDataMat,datingLabels=file2matrix(file)
+    normMat,ranges,minVals=autoNorm(datingDataMat)
+    m=normMat.shape[0]
+    numTestVecs=int(m*hoRatio)
+    errorCount=0.0
+    d=[]
+    for i in range(numTestVecs):
+        classifierResult=classify0(normMat[i,:],normMat[numTestVecs:m,:],datingLabels[numTestVecs:m],5)
+        d.append('分类器预测为： %d，实际为： %d' % (classifierResult,datingLabels[i]))
+        if (classifierResult!=datingLabels[i]):
+            errorCount+=1.0
+    errorRate=errorCount/float(numTestVecs)
+    erropercentage=errorRate*100
+    return errorCount,d,erropercentage

@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect,Http404,HttpResponse
 
 from django.core.urlresolvers import reverse
 
-from .forms import ItemForm,itemEntryForm
+from .forms import ItemForm,itemEntryForm,UploadExcelForm
 
 from django.contrib.auth.decorators import login_required
 
@@ -32,7 +32,8 @@ from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_conti
 from .knn import *
 from .biologists import *
 from .apriori import *
-import codecs,decTree
+import codecs,decTree,os
+import xlrd
 
 
 # Create your views here.
@@ -142,7 +143,7 @@ def desstat(request):
 def result(request):
     
 	#template=get_template('desstat.html')
-    requestData=request.GET.copy()
+    '''requestData=request.GET.copy()
     data=requestData['user_data']
     data=data.encode('utf-8')
     
@@ -157,8 +158,43 @@ def result(request):
     datavar=round(var(datanum),3)
     datastd=round(std(datanum),3)
     datacv=round((datastd/datamean*100),3)
+
+    knnfile = request.FILES.get('knnfile', None)
+    f = open(os.path.join('mainsite/static/userfiles/', knnfile.name), 'wb+')
+    for chunk in knnfile.chunks():
+        f.write(chunk)
+    errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfiles/'+knnfile.name))
+    context={'erropercentage':erropercentage,'ds':ds}
+    f.close()
+    os.remove(os.path.join('mainsite/static/userfiles/', knnfile.name))
+    return render(request,'mainsite/knnupres.html',context)
+    context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
+    return render(request,'mainsite/result.html',context)'''
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+    data=[]
+    table = wb.sheets()[0]
+    row = table.nrows
+    
+    for i in xrange(1, row):
+        col = table.row_values(i)
+        data.append(col)
+    datanum=[]
+    for i in range(0,len(data)):
+        datanum.append(data[i][0])
+
+    total=sum(datanum)
+    datamean=round(mean(datanum),3)
+    datamedian=round(float(median(datanum)),3)
+    datarange=round(ptp(datanum),3)
+    datavar=round(var(datanum),3)
+    datastd=round(std(datanum),3)
+    datacv=round((datastd/datamean*100),3)
     context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
     return render(request,'mainsite/result.html',context)
+
+
 
 @login_required
 def boxplot(request):
@@ -536,3 +572,39 @@ def id3res(request):
     context={'lt':lt}
     #context={'apdieDataSet':apdieDataSet[0]}
     return render(request,'mainsite/id3res.html',context)
+
+@login_required
+def knnup(request):
+    return render(request,'mainsite/knnup.html')
+
+@login_required
+def knnupres(request):
+    if request.method == 'POST':
+        '''ret = {'status': False, 'data': None, 'error': None}
+        try:
+            knnfile = request.FILES.get('knnfile', None)
+            f = open(os.path.join('mainsite/static/userfile', knnfile.name), 'wb+')
+            for chunk in knnfile.chunks():
+                f.write(chunk)
+            ret['status'] = True
+            ret['data'] = os.path.join('static',knnfile.name)
+        except Exception as e:
+            ret['error'] = e
+        finally:
+            errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfile/'+knnfile.name))
+            context={'erropercentage':erropercentage,'ds':ds}
+            f.close()
+            return render(request,'mainsite/knnupres.html',context)
+    return render(request, 'mainsite/knnup.html')'''
+        knnfile = request.FILES.get('knnfile', None)
+        f = open(os.path.join('mainsite/static/userfiles/', knnfile.name), 'wb+')
+        for chunk in knnfile.chunks():
+            f.write(chunk)
+        errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfiles/'+knnfile.name))
+        context={'erropercentage':erropercentage,'ds':ds}
+        f.close()
+        os.remove(os.path.join('mainsite/static/userfiles/', knnfile.name))
+        return render(request,'mainsite/knnupres.html',context)
+    else:
+        return render(request, 'mainsite/knnup.html')
+

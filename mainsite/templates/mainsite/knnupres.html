@@ -1,0 +1,18 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>自主数据kNN（k-近领算法）学习并预测运行结：</h2><br/>
+
+  <h4 style='font-family:宋体'><i>说明：在自主上传数据开放以后，研究内容不仅限于中风这一个疾病，比如每周玩手机所占时间百分比、每年吃的冰淇淋量…和患二型糖尿病的关系危险等级</i><h4>
+{% endblock %}
+
+{% block content %}
+    
+    {% for d in ds %}
+        <h4 style='font-family:微软雅黑'>{{ d }}</h4>
+    {% endfor %}
+    <h3><strong>测试数据的分类错误率为：{{erropercentage}}%</strong></h3>
+
+
+
+{% endblock content %}

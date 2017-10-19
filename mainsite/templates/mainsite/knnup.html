@@ -1,0 +1,32 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>2.自主数据kNN（k-近领算法）学习并预测</h2><br/>
+ 
+  <h4 style='font-family:宋体'><i>说明：在自主上传数据开放以后，研究内容不仅限于中风这一个疾病，比如每周玩手机所占时间百分比、每年吃的冰淇淋量…和患二型糖尿病的关系危险等级</i><h4>
+{% endblock %}
+
+{% block content %}
+
+<h4>选择你的数据：</h4>
+<h4>kNN算法要求  特征值均为数字 ，目标变量需放在最后一列（例如示例中的疗效等级转换为1、2、3）且需要转换为整数值，提交格式为.txt，标题行需删除。Excel保存时选txt格式并以制表符间隔。</h4>
+<form method="post" action="{% url 'mainsite:knnupres'   %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id='knnfile' type="file" name="knnfile" />
+        <input type="submit" value='提交' />
+    </form>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+{% endblock content %}
