@@ -597,7 +597,7 @@ def wc2(request):
         
         for line in wb.readlines():
             #line=line
-            line =unicode(line,'gbk').replace('\r\n','')
+            line =unicode(line,'gbk')
             text+=line
         text = ' '.join(jieba.cut(text))
         wcm = np.array(Image.open("mainsite/static/images/wcbase.png"))  
