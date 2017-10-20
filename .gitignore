@@ -2,3 +2,4 @@ VENV/
 *.pyc
 *.sqlite3
 __pycache__/
+VENV3/
