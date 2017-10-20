@@ -5,16 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h4 style='font-family:宋体'>注意：数字之间请用空格间隔开，但不要输入数字和空格以外的东西，<strong>因为不想写检查代码</strong>，例如，29 28 24 14……</h4>
-<h3>
-      <div class='container'>
+<h4 style='font-family:宋体'>注意：请将数据放在第一列,标题行默认为第一排，在数据计算时会被忽略。</h4>
+<h4><div class='container'>
 
-<form name='my form' action="{% url 'mainsite:normresult'   %}" method='GET'>
-    <textarea name='user_data' rows=3 cols=70></textarea><br/>
-    <h4><input type='submit' value='提交'>
-    <input type='reset' value='清除重填'></h4>
-</form>
-</div>
-
-</h3>
+<h3>提交并计算你的数据：</h3>
+ <form action="{% url 'mainsite:normresult' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="excel">
+  <input type="submit" value="提交">
+ </form>
+</div></h4>
 {% endblock content %}

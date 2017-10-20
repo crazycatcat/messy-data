@@ -10,7 +10,7 @@
  <ul>
       <li>
         <h3 style='font-family:宋体'>
-         您的数据：{{ datanum }}<br/>
+         您的数据：{{ data }}<br/>
 		 最重要的我都标出来了。。。是不是好贴心？<br/>
 		 -------------------------------------------------------------------------------------<br/>
 		 *均数：{{datamean}}<br/>
@@ -22,26 +22,28 @@
 		 <br/>
 		 <strong>BOXPLOT AND HIST:（需要注册账号登录后才能看到哦）</strong><br/>
 
-<h3 style='font-family:宋体'>BOXPLOT
-      <div class='container'>
+<h3 style='font-family:宋体'>BOXPLOT<h3/>
+      <h4><div class='container'>
 
-<form name='my form' action="{% url 'mainsite:boxplot'   %}" method='GET'>
-    <textarea name='user_data' rows=3 cols=70></textarea><br/>
-    <h4><input type='submit' value='提交'>
-    <input type='reset' value='清除重填'></h4>
-</form>
-</div>
+<h3>提交并计算你的数据：</h3>
+ <form action="{% url 'mainsite:boxplot' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="excel">
+  <input type="submit" value="提交">
+ </form>
+</div></h4>
 
-</h3>
-<h3 style='font-family:宋体'>HIST
-      <div class='container'>
 
-<form name='my form' action="{% url 'mainsite:hist'   %}" method='GET'>
-    <textarea name='user_data' rows=3 cols=70></textarea><br/>
-    <h4><input type='submit' value='提交'>
-    <input type='reset' value='清除重填'></h4>
-</form>
-</div>
+<h3 style='font-family:宋体'>HIST<h3/>
+      <h4><div class='container'>
+
+<h3>提交并计算你的数据：</h3>
+ <form action="{% url 'mainsite:hist' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="excel">
+  <input type="submit" value="提交">
+ </form>
+</div></h4>
 
 </h3>
         </h3>

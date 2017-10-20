@@ -26,7 +26,7 @@ class charpterEntry(models.Model):
     pub_date=models.DateTimeField(default=timezone.now)
 	
     class Meta:
-	verbose_name_plural='charpterentries'
+        verbose_name_plural='charpterentries'
         
       
     def __unicode__(self):
@@ -42,7 +42,7 @@ class Item(models.Model):
     owner=models.ForeignKey(User)
     
     class Meta:
-	    ordering=('-pub_date',)
+        ordering=('-pub_date',)
         
       
     def __unicode__(self):
@@ -54,7 +54,7 @@ class itemEntry(models.Model):
     pub_date=models.DateTimeField(default=timezone.now)
 	
     class Meta:
-	verbose_name_plural='itementries'
+        verbose_name_plural='itementries'
         
       
     def __unicode__(self):

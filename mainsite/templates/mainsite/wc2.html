@@ -1,0 +1,22 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>2.生成你的词云</h1>
+{% endblock %}
+
+{% block content %}
+<h4 style='font-family:宋体'>注意：暂时只支持txt文件。</h4>
+<h4>
+      <div class='container'>
+
+
+<h3>提交并生成你的词云：</h3>
+ <form action="{% url 'mainsite:wc2' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="txt">
+  <input type="submit" value="提交">
+ </form>
+</div>
+
+</h4>
+{% endblock content %}

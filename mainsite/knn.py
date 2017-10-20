@@ -16,7 +16,7 @@ def classify0(inX,dataSet,labels,k):
     for i in range(k):
         voteIlabel=labels[sortedDistIndicies[i]]
         classCount[voteIlabel]=classCount.get(voteIlabel,0)+1
-    sortedClassCount=sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)
+    sortedClassCount=sorted(classCount.items(),key=operator.itemgetter(1),reverse=True)
     return sortedClassCount[0][0]
 
 def file2matrix(filename):
@@ -82,7 +82,7 @@ def file2matrix1(file):
     classLabelVector=[]
     index=0
     for line in arrayOLines:
-        line=line.strip()
+        line=unicode(line,'utf8')
         listFromLine=line.split('\t')
         returnMat[index,:]=listFromLine[0:3]
         classLabelVector.append(int(listFromLine[-1]))

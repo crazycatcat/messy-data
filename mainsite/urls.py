@@ -103,6 +103,10 @@ urlpatterns = [
     url(r'^datalabs/crna/$',views.crna,name='crna'),
     #crnares
     url(r'^datalabs/crna/cdnares$',views.crnares,name='crnares'),
+    #wc1
+    url(r'^datalabs/wc1/$',views.wc1,name='wc1'),
+    #wc2
+    url(r'^datalabs/wc2/$',views.wc2,name='wc2'),
 ]
 
 

@@ -8,6 +8,7 @@ from .models import Charpter,Item,itemEntry,Statistic,DataMining,DataLab
 
 from django.http import HttpResponseRedirect,Http404,HttpResponse
 
+
 from django.core.urlresolvers import reverse
 
 from .forms import ItemForm,itemEntryForm,UploadExcelForm
@@ -32,10 +33,14 @@ from scipy.stats import kstest,levene,ttest_1samp,ttest_rel,ttest_ind,chi2_conti
 from .knn import *
 from .biologists import *
 from .apriori import *
-import codecs,decTree
+import codecs
+from . import decTree
 import xlrd,copy
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+from PIL import Image,ImageDraw
+from wordcloud import WordCloud, STOPWORDS
+import jieba
 
 # Create your views here.
 
@@ -43,11 +48,6 @@ def index(request):
     return render(request,'mainsite/index.html')
 	
 def charpters(request):
-    #charpters=Charpter.objects.all()
-    #charpter_lists=list()
-    #for count,charpter in enumerate(charpters):
-        #charpter_lists.append("No.{}:".format(str(count))+str(charpter)+"<br>")
-    #return HttpResponse(charpter_lists)
     charpters=Charpter.objects.order_by('pub_date')
     context={'charpters':charpters}
     return render(request,'mainsite/charpters.html',context)
@@ -68,7 +68,7 @@ def charpter(request,charpter_id):
 def item(request,item_id):
     item=Item.objects.get(id=item_id)
     if item.owner !=request.user:
-	raise Http404
+        raise Http404
     entries=item.itementry_set.order_by('-pub_date')
     context={'item':item,'entries':entries}
     return render(request,'mainsite/item.html',context)
@@ -76,14 +76,14 @@ def item(request,item_id):
 @login_required	
 def new_item(request):
     if request.method!='POST':
-	form=ItemForm()
+        form=ItemForm()
     else:
-	form=ItemForm(request.POST)
-	if form.is_valid():
-	    new_item=form.save(commit=False)
-	    new_item.owner=request.user
-	    new_item.save()
-	    return HttpResponseRedirect(reverse('mainsite:items'))
+        form=ItemForm(request.POST)
+        if form.is_valid():
+            new_item=form.save(commit=False)
+            new_item.owner=request.user
+            new_item.save()
+            return HttpResponseRedirect(reverse('mainsite:items'))
 	
     context={'form':form}
     return render(request,'mainsite/new_item.html',context)
@@ -92,14 +92,14 @@ def new_item(request):
 def new_itementry(request,item_id):
     item=Item.objects.get(id=item_id)
     if request.method!='POST':
-	form=itemEntryForm()
+        form=itemEntryForm()
     else:
-	form=itemEntryForm(data=request.POST)
-	if form.is_valid():
-	    new_itementry=form.save(commit=False)
-	    new_itementry.item=item
-	    new_itementry.save()
-	    return HttpResponseRedirect(reverse('mainsite:item',args=[item_id]))
+        form=itemEntryForm(data=request.POST)
+        if form.is_valid():
+            new_itementry=form.save(commit=False)
+            new_itementry.item=item
+            new_itementry.save()
+            return HttpResponseRedirect(reverse('mainsite:item',args=[item_id]))
 	
     context={'item':item,'form':form}
     return render(request,'mainsite/new_itementry.html',context)
@@ -109,14 +109,14 @@ def edit_itementry(request,itementry_id):
     entry=itemEntry.objects.get(id=itementry_id)
     item=entry.item
     if item.owner !=request.user:
-	raise Http404
+        raise Http404
     if request.method!='POST':
-	form=itemEntryForm(instance=entry)
+        form=itemEntryForm(instance=entry)
     else:
-	form=itemEntryForm(instance=entry,data=request.POST)
-	if form.is_valid():
-	    form.save()
-	    return HttpResponseRedirect(reverse('mainsite:item',args=[item.id]))
+        form=itemEntryForm(instance=entry,data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mainsite:item',args=[item.id]))
 	
     context={'entry':entry,'item':item,'form':form}
     return render(request,'mainsite/edit_itementry.html',context)
@@ -143,45 +143,19 @@ def desstat(request):
 	
 def result(request):
     
-	#template=get_template('desstat.html')
-    '''requestData=request.GET.copy()
-    data=requestData['user_data']
-    data=data.encode('utf-8')
-    
-    datanum=[]
-    for i in data.split(' '):
-	datanum.append(int(i))
-    
-    total=sum(datanum)
-    datamean=round(mean(datanum),3)
-    datamedian=round(float(median(datanum)),3)
-    datarange=round(ptp(datanum),3)
-    datavar=round(var(datanum),3)
-    datastd=round(std(datanum),3)
-    datacv=round((datastd/datamean*100),3)
-
-    knnfile = request.FILES.get('knnfile', None)
-    f = open(os.path.join('mainsite/static/userfiles/', knnfile.name), 'wb+')
-    for chunk in knnfile.chunks():
-        f.write(chunk)
-    errorCount,ds,erropercentage=knnUpClassTest(str('mainsite/static/userfiles/'+knnfile.name))
-    context={'erropercentage':erropercentage,'ds':ds}
-    f.close()
-    os.remove(os.path.join('mainsite/static/userfiles/', knnfile.name))
-    return render(request,'mainsite/knnupres.html',context)
-    context={'data':data,'datamean':datamean,'datamedian':datamedian,'datarange':datarange,'datavar':datavar,'datastd':datastd,'datacv':datacv}
-    return render(request,'mainsite/result.html',context)'''
+	
     form = UploadExcelForm(request.POST, request.FILES)
     if form.is_valid():
         wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
     data=[]
-    table = wb.sheets()[0]
+    table = wb.sheets()[0]#获取整个第一张表
+    #col = table.ncols
     row = table.nrows
-    
-    for i in xrange(1, row):
+    #print col,row
+    for i in range(1, row):
         col = table.row_values(i)
         data.append(col)
-    datanum=[]
+    datanum=[]#;print data
     for i in range(0,len(data)):
         datanum.append(data[i][0])
 
@@ -199,14 +173,20 @@ def result(request):
 
 @login_required
 def boxplot(request):
-    requestData=request.GET.copy()
-    data=requestData['user_data']
-    data=data.encode('utf-8')
-     
-    datanum=[]
-    for i in data.split(' '):
-	datanum.append(int(i))
-    datanum=list(datanum)
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+    data=[]
+    table = wb.sheets()[0]#获取整个第一张表
+    #col = table.ncols
+    row = table.nrows
+    #print col,row
+    for i in range(1, row):
+        col = table.row_values(i)
+        data.append(col)
+    datanum=[]#;print data
+    for i in range(0,len(data)):
+        datanum.append(data[i][0])
     fig=Figure(figsize=(6,6))
     ax=fig.add_subplot(111)
     ax.boxplot(datanum)
@@ -218,14 +198,20 @@ def boxplot(request):
 
 @login_required	
 def hist(request):
-	#template=get_template('desstat.html')
-    requestData=request.GET.copy()
-    data=requestData['user_data']
-    data=data.encode('utf-8')
-    datanum=[]
-    for i in data.split(' '):
-	datanum.append(int(i))
-    datanum=list(datanum)
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+    data=[]
+    table = wb.sheets()[0]#获取整个第一张表
+    #col = table.ncols
+    row = table.nrows
+    #print col,row
+    for i in range(1, row):
+        col = table.row_values(i)
+        data.append(col)
+    datanum=[]#;print data
+    for i in range(0,len(data)):
+        datanum.append(data[i][0])
     fig=Figure(figsize=(6,6))
     ax=fig.add_subplot(111)
     ax.hist(datanum)
@@ -240,13 +226,20 @@ def normtest(request):
     return render(request,'mainsite/normtest.html')
 	
 def normresult(request):
-    requestData=request.GET.copy()
-    data=requestData['user_data']
-    data=data.encode('utf-8')
-    datanum=[]
-    for i in data.split(' '):
-	datanum.append(int(i))
-    datanum=list(datanum)
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+    data=[]
+    table = wb.sheets()[0]#获取整个第一张表
+    #col = table.ncols
+    row = table.nrows
+    #print col,row
+    for i in range(1, row):
+        col = table.row_values(i)
+        data.append(col)
+    datanum=[]#;print data
+    for i in range(0,len(data)):
+        datanum.append(data[i][0])
     res=kstest(datanum, 'norm')
     z=round(float(res[0]),4)
     p=round(float(res[1]),4)
@@ -257,26 +250,27 @@ def sdtest(request):
     return render(request,'mainsite/sdtest.html')
 	
 def sdtestresult(request):
-    requestData=request.GET.copy()
-    data1=requestData['user_data1']
-    data1=data1.encode('utf-8')
-    datanum1=[]
-    for i in data1.split(' '):
-	datanum1.append(int(i))
-    datanum1=list(datanum1)
-	
-    requestData=request.GET.copy()
-    data2=requestData['user_data2']
-    data2=data2.encode('utf-8')
-    datanum2=[]
-    for i in data2.split(' '):
-	datanum2.append(int(i))
-    datanum2=list(datanum2)
-	
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+    data=[]
+    table = wb.sheets()[0]#获取整个第一张表
+    #col = table.ncols
+    row = table.nrows
+    #print col,row
+    for i in range(1, row):
+        col = table.row_values(i)
+        data.append(col)
+    datanum1=[]#;print data
+    for i in range(0,len(data)):
+        datanum1.append(data[i][0])
+    datanum2=[]#;print data
+    for i in range(0,len(data)):
+        datanum2.append(data[i][1])
     res=levene(datanum1,datanum2,center = 'trimmed')
     f=round(float(res[0]),4)
     p=round(float(res[1]),4)
-    context={'data1':data1,'data2':data2,'f':f,'p':p}
+    context={'data':data,'f':f,'p':p}
     return render(request,'mainsite/sdtestresult.html',context)
 	
 def knn(request):
@@ -310,7 +304,7 @@ def dttestres(request):
     data1=data1.encode('utf-8')
     datanum1=[]
     for i in data1.split(' '):
-	datanum1.append(int(i))
+        datanum1.append(int(i))
     datanum1=list(datanum1)
 	
     requestData=request.GET.copy()
@@ -335,7 +329,7 @@ def pttestres(request):
     data1=data1.encode('utf-8')
     datanum1=[]
     for i in data1.split(' '):
-	datanum1.append(int(i))
+        datanum1.append(int(i))
     datanum1=list(datanum1)
 	
     requestData=request.GET.copy()
@@ -343,7 +337,7 @@ def pttestres(request):
     data2=data2.encode('utf-8')
     datanum2=[]
     for i in data2.split(' '):
-	datanum2.append(int(i))
+        datanum2.append(int(i))
     datanum2=list(datanum2)
     
     res=ttest_rel(datanum1,datanum2)
@@ -361,7 +355,7 @@ def upttestres(request):
     data1=data1.encode('utf-8')
     datanum1=[]
     for i in data1.split(' '):
-	datanum1.append(int(i))
+        datanum1.append(int(i))
     datanum1=list(datanum1)
 	
     requestData=request.GET.copy()
@@ -369,7 +363,7 @@ def upttestres(request):
     data2=data2.encode('utf-8')
     datanum2=[]
     for i in data2.split(' '):
-	datanum2.append(int(i))
+        datanum2.append(int(i))
     datanum2=list(datanum2)
     
     res=ttest_ind(datanum1,datanum2)
@@ -387,7 +381,7 @@ def attestres(request):
     data1=data1.encode('utf-8')
     datanum1=[]
     for i in data1.split(' '):
-	datanum1.append(int(i))
+        datanum1.append(int(i))
     datanum1=list(datanum1)
 	
     requestData=request.GET.copy()
@@ -395,7 +389,7 @@ def attestres(request):
     data2=data2.encode('utf-8')
     datanum2=[]
     for i in data2.split(' '):
-	datanum2.append(int(i))
+        datanum2.append(int(i))
     datanum2=list(datanum2)
     
     res=ttest_ind(datanum1,datanum2,equal_var=False)
@@ -506,16 +500,16 @@ def apdieres(request):
     L,suppData=apriori(apdieDataSet,minSupport=0.3)
     res2s=[]
     for item in L[1]:
-	if item.intersection(['Death']):
-	    res2s.append(item)
+        if item.intersection(['Death']):
+            res2s.append(item)
     res3s=[]
     for item in L[2]:
-	if item.intersection(['Death']):
-	    res3s.append(item)
+        if item.intersection(['Death']):
+            res3s.append(item)
     res4s=[]
     for item in L[3]:
-	if item.intersection(['Death']):
-	    res4s.append(item)
+        if item.intersection(['Death']):
+            res4s.append(item)
     context={'res2s':res2s,'res3s':res3s,'res4s':res4s}
     #context={'apdieDataSet':apdieDataSet[0]}
     return render(request,'mainsite/apdieres.html',context)
@@ -593,3 +587,36 @@ def knnupres(request):
         return render(request,'mainsite/knnupres.html',context)
     else:
         return render(request, 'mainsite/knnup.html')
+
+def wc1(request):
+    return render(request,'mainsite/wc1.html')
+
+def wc2(request):
+    if request.method == 'POST':
+        wb =request.FILES['txt'];text=''
+        
+        for line in wb.readlines():
+            line = line.decode('utf-8').strip('\n')
+            text+=line
+        text = ' '.join(jieba.cut(text))
+        wcm = np.array(Image.open("mainsite/static/images/wcbase.png"))  
+  
+        stopwords = set(STOPWORDS)  
+        stopwords.add("said")  
+  
+        wc = WordCloud(
+            font_path="mainsite/static/files/simsun.ttf",
+            background_color="white",   
+            max_words=2000,   
+            mask=wcm,  
+            stopwords=stopwords)  
+      
+
+        wc.generate(text)  
+        img = wc.to_image()
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return response
+        
+    else:
+        return render(request, 'mainsite/wc2.html')
