@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1c!=!^mmq5j7v+=gp+=m_lj=&g_fna+))628qw%1f145^tm0zx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -116,7 +116,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-HTTP_TOTAL_ROUTE_TIME=3000
+HTTP_TOTAL_ROUTE_TIME=300000
 
 
 # Static files (CSS, JavaScript, Images)
