@@ -11,18 +11,19 @@ def createC1(dataSet):
             if not [item] in C1:
                 C1.append([item])
     C1.sort()
-    return map(frozenset,C1)
+    return list(map(frozenset,C1))
 
 def scanD(D,Ck,minSupport):
     ssCnt={}
     for tid in D:
         for can in Ck:
             if can.issubset(tid):
-                if not ssCnt.has_key(can):
+                if can not in ssCnt:
                     ssCnt[can]=1
                 else:
                     ssCnt[can]+=1
-    numItems=float(len(D))
+    numItems=float(len(list(D)))
+    #print(numItems)
     retList=[]
     supportData={}
     for key in ssCnt:
@@ -46,8 +47,11 @@ def aprioriGen(Lk,k):
     return retList
 
 def apriori(dataSet,minSupport=0.5):
+    
     C1=createC1(dataSet)
-    D=map(set,dataSet)
+    #tmp=dataSet
+    D=list(map(set,dataSet))
+    #print(D)
     L1,supportData=scanD(D,C1,minSupport)
     L=[L1]
     k=2
