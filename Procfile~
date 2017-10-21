@@ -1,1 +1,1 @@
-web: gunicorn MessyData.wsgi --log-file -
+web: gunicorn MessyData.wsgi --log-level debug
