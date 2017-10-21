@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1c!=!^mmq5j7v+=gp+=m_lj=&g_fna+))628qw%1f145^tm0zx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -150,7 +150,8 @@ if os.getcwd()=='/app':
     SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO','https')
     
     ALLOWED_HOSTS=['messy-data.herokuapp.com']
-    DEBUG=False
+    HTTP_TOTAL_ROUTE_TIME=300000
+    DEBUG=True
     BASE_DIR=os.path.dirname(os.path.abspath(__file__))
     #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
