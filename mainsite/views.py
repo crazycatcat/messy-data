@@ -601,8 +601,8 @@ def wc2res(request):
         wb =request.FILES['txt'];text=''
         
         for line in wb.readlines():
-            line=line.decode('utf-8', 'ignore').encode('utf-8')
-            #line=line.decode('gbk', 'ignore').encode('utf-8')
+             #line=line.decode('utf-8', 'ignore').encode('utf-8')
+            line=line.decode('gbk', 'ignore').encode('utf-8')
           #  line=line.decode('latin1', 'ignore').encode('utf-8')
             line=line.decode('utf-8')
             
