@@ -591,15 +591,19 @@ def knnupres(request):
 def wc1(request):
     return render(request,'mainsite/wc1.html')
 
+@login_required
 def wc2(request):
     return render(request,'mainsite/wc2.html')
-	
-def wc2(request):
+
+@login_required
+def wc2res(request):
     if request.method == 'POST':
         wb =request.FILES['txt'];text=''
         
         for line in wb.readlines():
             line=line.decode('utf-8', 'ignore').encode('utf-8')
+            #line=line.decode('gbk', 'ignore').encode('utf-8')
+          #  line=line.decode('latin1', 'ignore').encode('utf-8')
             line=line.decode('utf-8')
             
             line=line.replace('K','')
@@ -618,7 +622,7 @@ def wc2(request):
         for line in f:
             stopwords.add(line.strip('\n'))
             
-        print(stopwords)
+        
         wc = WordCloud(
             font_path="mainsite/static/files/simsun.ttf",
             background_color="white",   

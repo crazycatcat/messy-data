@@ -11,7 +11,7 @@
 
 
 <h3>提交并生成你的词云：</h3>
- <form action="{% url 'mainsite:wc2' %}" method="post" enctype="multipart/form-data" >
+ <form action="{% url 'mainsite:wc2res' %}" method="post" enctype="multipart/form-data" >
   {% csrf_token %}
   <input type="file" name="txt">
   <input type="submit" value="提交">

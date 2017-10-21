@@ -108,7 +108,7 @@ urlpatterns = [
     #wc2
     url(r'^datalabs/wc2/$',views.wc2,name='wc2'),
     #wc2res
-    #url(r'^datalabs/wc2/wc2res/$',views.wc2res,name='wc2res'),
+    url(r'^datalabs/wc2/wc2res/$',views.wc2res,name='wc2res'),
 ]
 
 
