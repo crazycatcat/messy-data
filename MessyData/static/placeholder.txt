@@ -1,3 +1,0 @@
-This file ensures that MessyData/static/ will be added to the project. 
-Django will collect static files and place them in MessyData/static/.
-
