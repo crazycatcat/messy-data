@@ -42,10 +42,10 @@ class Item(models.Model):
     owner=models.ForeignKey(User)
     
     class Meta:
-        ordering=('-pub_date',)
-        
+        #ordering=('-pub_date',)
+        verbose_name_plural='items'
       
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 		
 class itemEntry(models.Model):
