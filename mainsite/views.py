@@ -599,7 +599,7 @@ def wc2(request):
         wb =request.FILES['txt'];text=''
         
         for line in wb.readlines():
-            line=line.decode('gbk', 'ignore').encode('utf-8')
+            line=line.decode('utf-8', 'ignore').encode('utf-8')
             line=line.decode('utf-8')
             
             line=line.replace('K','')
