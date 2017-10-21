@@ -151,7 +151,7 @@ if os.getcwd()=='/app':
     
     ALLOWED_HOSTS=['messy-data.herokuapp.com']
     HTTP_TOTAL_ROUTE_TIME=300000
-    DEBUG=True
+    DEBUG=False
     BASE_DIR=os.path.dirname(os.path.abspath(__file__))
     #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
