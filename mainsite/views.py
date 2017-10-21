@@ -549,7 +549,7 @@ def id3res(request):
         
             line=line.strip()
         
-        #line=unicode(line,"utf8")
+            #line=unicode(line,"utf8")
         #line=line.decode('ascii')
         #line=line.encode("utf-8")
         
@@ -563,7 +563,7 @@ def id3res(request):
     ll=[u'年龄',u'舌苔',u'是否有汗',u'是否畏寒']
     lt=decTree.createTree(lense,ll)
     lt=str(lt).replace('u\'','\'')
-    lt=lt.decode("unicode-escape")
+    #lt=lt.decode("unicode-escape")
     context={'lt':lt}
     #context={'apdieDataSet':apdieDataSet[0]}
     return render(request,'mainsite/id3res.html',context)
