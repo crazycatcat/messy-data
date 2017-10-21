@@ -592,24 +592,38 @@ def wc1(request):
     return render(request,'mainsite/wc1.html')
 
 def wc2(request):
+    return render(request,'mainsite/wc2.html')
+	
+def wc2(request):
     if request.method == 'POST':
         wb =request.FILES['txt'];text=''
         
         for line in wb.readlines():
-            #line=line
-            line =unicode(line,'gbk')
+            line=line.decode('gbk', 'ignore').encode('utf-8')
+            line=line.decode('utf-8')
+            
+            line=line.replace('K','')
+            line=line.replace('T','')
+            line=line.replace('\r\n','')
+            line=line.replace('\u3000','')
+            line=line.replace(' ','')
+            
             text+=line
         text = ' '.join(jieba.cut(text))
         wcm = np.array(Image.open("mainsite/static/images/wcbase.png"))  
   
-        stopwords = set(STOPWORDS)  
-        stopwords.add("said")  
-  
+        stopwords = set(STOPWORDS)
+        
+        f=open('mainsite/static/files/stopwords.txt','r').readlines()
+        for line in f:
+            stopwords.add(line.strip('\n'))
+            
+        print(stopwords)
         wc = WordCloud(
             font_path="mainsite/static/files/simsun.ttf",
             background_color="white",   
-            max_words=2000,   
-            mask=wcm,  
+            max_words=1000,   
+            mask=wcm,
             stopwords=stopwords)  
       
 
@@ -618,6 +632,5 @@ def wc2(request):
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return response
-        
     else:
         return render(request, 'mainsite/wc2.html')
