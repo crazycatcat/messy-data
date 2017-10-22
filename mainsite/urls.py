@@ -67,6 +67,18 @@ urlpatterns = [
     url(r'^statistics/fisherres/$',views.fisherres,name='fisherres'),
     #Dataminings
     url(r'^dataminings/$',views.dataminings,name='dataminings'),
+    #apdie
+    url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
+    #apdieres
+    url(r'^datalabs/apdie/apdieres/$',views.apdieres,name='apdieres'),
+    #appoint
+    url(r'^datalabs/appoint/$',views.appoint,name='appoint'),
+    #appointres
+    url(r'^datalabs/appoint/appointres/$',views.appointres,name='appointres'),
+    #affinity
+    url(r'^datalabs/affinity/$',views.affinity,name='affinity'),
+    #affinityres
+    url(r'^datalabs/affinity/affinityres/$',views.affinityres,name='affinityres'),
     #Datalabs
     url(r'^datalabs/$',views.datalabs,name='datalabs'),
     #kNN
@@ -85,12 +97,6 @@ urlpatterns = [
     url(r'^datalabs/id3/id3res/$',views.id3res,name='id3res'),
     #apdie
     url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
-    #apdieres
-    url(r'^datalabs/apdie/apdieres/$',views.apdieres,name='apdieres'),
-    #appoint
-    url(r'^datalabs/appoint/$',views.appoint,name='appoint'),
-    #appointres
-    url(r'^datalabs/appoint/appointres/$',views.appointres,name='appointres'),
     #caa
     url(r'^datalabs/caa/$',views.caa,name='caa'),
     #caares

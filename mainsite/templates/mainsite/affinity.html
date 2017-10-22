@@ -1,0 +1,26 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>1.简单亲和性分析对针刺治疗周围性面瘫主穴搭配规律研究（示例演示）</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <img src="{% static 'images/affinity.PNG' %}" /><h5>……后省略（共一百个处方）</h5>
+	  <br/>
+	  
+	  <h3><a href="{% url 'mainsite:affinityres' %}" style='font-family:微软雅黑'>运行示例（需要注册登录）</a></h3>
+
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}

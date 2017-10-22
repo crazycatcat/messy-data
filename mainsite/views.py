@@ -41,6 +41,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image,ImageDraw
 from wordcloud import WordCloud, STOPWORDS
 import jieba
+from .affinity import *
 
 # Create your views here.
 
@@ -638,3 +639,13 @@ def wc2res(request):
         return response
     else:
         return render(request, 'mainsite/wc2.html')
+
+def affinity(request):
+    return render(request,'mainsite/affinity.html')
+
+@login_required
+def affinityres(request):
+    suppres=sortsupp()
+    confres=sortconf()
+    context={'suppres':suppres,'confres':confres}
+    return render(request,'mainsite/affinityres.html',context)
