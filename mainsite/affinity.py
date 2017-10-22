@@ -45,21 +45,27 @@ def print_rule(premise,conclusion,support,confidence,features):
     res="选择  {0}穴  的同时也会选择 {1}穴。   - 支持度：{2}\n - 置信度：{3:.3f}\n".format(premise_name,conclusion_name,support[(premise,conclusion)],confidence[(premise,conclusion)])
     return res
 
+def print_rule2(premise,conclusion,support,confidence,features):
+    premise_name=features[premise]
+    conclusion_name=features[conclusion]
+    res="选择  {0}  的同时也会选择 {1}。   - 支持度：{2}\n - 置信度：{3:.3f}\n".format(premise_name,conclusion_name,support[(premise,conclusion)],confidence[(premise,conclusion)])
+    return res
+
 from operator import itemgetter
-def sortsupp():
+def sortsupp(k=5):
     sorted_support=sorted(support.items(),key=itemgetter(1),reverse=True)
     suppres=[]
-    for index in range(5):
+    for index in range(k):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_support[index][0]
         #premise=0
         suppres.append(i+print_rule(premise,conclusion,support,confidence,features))
     return suppres
     
-def sortconf():
+def sortconf(k=5):
     sorted_confidence=sorted(confidence.items(),key=itemgetter(1),reverse=True)
     confres=[]
-    for index in range(5):
+    for index in range(k):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_confidence[index][0]
         #premise=0

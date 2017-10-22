@@ -1,0 +1,22 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>自主数据提交简单亲和性分析结果：</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：出现错误请检查你提交原始数据的的格式。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+     <h3>您的数据共有{{n}}条处方</h3><br/>
+     <h3>药物、穴位等搭配支持度最高的前十种:</h3>
+    {% for i in suppres %}
+        <h4 style='font-family:微软雅黑'>{{ i }}</h4>
+    {% endfor %}<br/>
+
+    <h3>药物、穴位等搭配置信度最高的前十种:</h3>
+    {% for i in confres %}
+        <h4 style='font-family:微软雅黑'>{{ i }}</h4>
+    {% endfor %}<br/>
+
+
+{% endblock content %}

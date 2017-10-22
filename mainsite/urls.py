@@ -68,17 +68,21 @@ urlpatterns = [
     #Dataminings
     url(r'^dataminings/$',views.dataminings,name='dataminings'),
     #apdie
-    url(r'^datalabs/apdie/$',views.apdie,name='apdie'),
+    url(r'^dataminings/apdie/$',views.apdie,name='apdie'),
     #apdieres
-    url(r'^datalabs/apdie/apdieres/$',views.apdieres,name='apdieres'),
+    url(r'^dataminings/apdie/apdieres/$',views.apdieres,name='apdieres'),
     #appoint
-    url(r'^datalabs/appoint/$',views.appoint,name='appoint'),
+    url(r'^dataminings/appoint/$',views.appoint,name='appoint'),
     #appointres
-    url(r'^datalabs/appoint/appointres/$',views.appointres,name='appointres'),
+    url(r'^dataminings/appoint/appointres/$',views.appointres,name='appointres'),
     #affinity
-    url(r'^datalabs/affinity/$',views.affinity,name='affinity'),
+    url(r'^dataminings/affinity/$',views.affinity,name='affinity'),
     #affinityres
-    url(r'^datalabs/affinity/affinityres/$',views.affinityres,name='affinityres'),
+    url(r'^dataminings/affinity/affinityres/$',views.affinityres,name='affinityres'),
+    #affup
+    url(r'^dataminings/affup/$',views.affup,name='affup'),
+    #affupres
+    url(r'^dataminings/affup/affupres/$',views.affupres,name='affupres'),
     #Datalabs
     url(r'^datalabs/$',views.datalabs,name='datalabs'),
     #kNN

@@ -649,3 +649,66 @@ def affinityres(request):
     confres=sortconf()
     context={'suppres':suppres,'confres':confres}
     return render(request,'mainsite/affinityres.html',context)
+	
+def affup(request):
+    return render(request,'mainsite/affup.html')
+	
+def affupres(request):
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read())
+    wb=wb.sheets()[0]
+    nrows = wb.nrows
+    ncols = wb.ncols
+    data=[]
+    for i in range(1, nrows):
+        col =wb.row_values(i)
+        col=col[1:]
+        data.append(col)
+    features=wb.row_values(0)
+    features=features[1:]
+    X=np.array(data)
+    n_samples, n_features = X.shape
+    vaild_rules=defaultdict(int)
+    invaild_rules=defaultdict(int)
+    num_occurances=defaultdict(int)
+
+
+    for sample in X:
+        for premise in range(n_features):
+            if sample[premise]==0:continue
+            num_occurances[premise]+=1
+            for conclusion in range(n_features):
+                if premise==conclusion:continue
+                if sample[conclusion]==1:
+                    vaild_rules[(premise,conclusion)]+=1
+                else:
+                    invaild_rules[(premise,conclusion)]+=1
+
+    support=vaild_rules
+    confidence=defaultdict(float)
+    for premise,conclusion in vaild_rules.keys():
+        rule=(premise,conclusion)
+        confidence[rule]=vaild_rules[rule]/num_occurances[premise]
+    premise_name=features[premise]
+    conclusion_name=features[conclusion]
+    res="选择  {0}  的同时也会选择 {1}。   - 支持度：{2}\n - 置信度：{3:.3f}\n".format(premise_name,conclusion_name,support[(premise,conclusion)],confidence[(premise,conclusion)])
+    
+    sorted_support=sorted(support.items(),key=itemgetter(1),reverse=True)
+    suppres=[]
+    for index in range(20):
+        i="规则 #{0}\n".format(index+1)
+        premise,conclusion=sorted_support[index][0]
+
+        suppres.append(i+print_rule2(premise,conclusion,support,confidence,features))
+
+    sorted_confidence=sorted(confidence.items(),key=itemgetter(1),reverse=True)
+    confres=[]
+    for index in range(20):
+        i="规则 #{0}\n".format(index+1)
+        premise,conclusion=sorted_confidence[index][0]
+
+        confres.append(i+print_rule2(premise,conclusion,support,confidence,features))
+    n=nrows-1
+    context={'suppres':suppres,'confres':confres,'n':n}
+    return render(request,'mainsite/affupres.html',context)
