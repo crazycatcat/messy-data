@@ -9,6 +9,6 @@
 <h4>
  <h4 style='font-family:微软雅黑'>词汇字体越大出现频率越高，老爷子是有多爱桂枝啊~~~</h4>
 {% load staticfiles %}
-      <img src="{% static 'images/wcex.png' %}">
+      <img src="{% static 'images/SHexWC.png' %}">
 </h4>
 {% endblock content %}
