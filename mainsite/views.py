@@ -696,7 +696,7 @@ def affupres(request):
     
     sorted_support=sorted(support.items(),key=itemgetter(1),reverse=True)
     suppres=[]
-    for index in range(20):
+    for index in range(10):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_support[index][0]
 
@@ -704,7 +704,7 @@ def affupres(request):
 
     sorted_confidence=sorted(confidence.items(),key=itemgetter(1),reverse=True)
     confres=[]
-    for index in range(20):
+    for index in range(10):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_confidence[index][0]
 
