@@ -303,19 +303,15 @@ def dttest(request):
 def dttestres(request):
     requestData=request.GET.copy()
     data1=requestData['user_data1']
-    data1=data1.encode('utf-8')
+    data1=str(data1)
     datanum1=[]
     for i in data1.split(' '):
         datanum1.append(int(i))
-    datanum1=list(datanum1)
-	
     requestData=request.GET.copy()
     data2=requestData['user_data2']
-    data2=data2.encode('utf-8')
+    data2=str(data2)
     datanum2=[]
     datanum2.append(int(data2))
-    datanum2=list(datanum2)
-    
     res=ttest_1samp(datanum1,popmean=datanum2)
     t=round(float(res[0]),4)
     p=round(float(res[1]),4)
@@ -328,19 +324,19 @@ def pttest(request):
 def pttestres(request):
     requestData=request.GET.copy()
     data1=requestData['user_data1']
-    data1=data1.encode('utf-8')
+    data1=str(data1)
     datanum1=[]
     for i in data1.split(' '):
         datanum1.append(int(i))
-    datanum1=list(datanum1)
-	
+    #datanum1=list(datanum1)
+    
     requestData=request.GET.copy()
     data2=requestData['user_data2']
-    data2=data2.encode('utf-8')
+    data2=str(data2)
     datanum2=[]
     for i in data2.split(' '):
         datanum2.append(int(i))
-    datanum2=list(datanum2)
+    #datanum2=list(datanum2)
     
     res=ttest_rel(datanum1,datanum2)
     t=round(float(res[0]),4)
@@ -354,20 +350,16 @@ def upttest(request):
 def upttestres(request):
     requestData=request.GET.copy()
     data1=requestData['user_data1']
-    data1=data1.encode('utf-8')
+    data1=str(data1)
     datanum1=[]
     for i in data1.split(' '):
-        datanum1.append(int(i))
-    datanum1=list(datanum1)
-	
+        datanum1.append(int(i))	
     requestData=request.GET.copy()
     data2=requestData['user_data2']
-    data2=data2.encode('utf-8')
+    data2=str(data2)
     datanum2=[]
     for i in data2.split(' '):
         datanum2.append(int(i))
-    datanum2=list(datanum2)
-    
     res=ttest_ind(datanum1,datanum2)
     t=round(float(res[0]),4)
     p=round(float(res[1]),4)
@@ -380,20 +372,16 @@ def attest(request):
 def attestres(request):
     requestData=request.GET.copy()
     data1=requestData['user_data1']
-    data1=data1.encode('utf-8')
+    data1=str(data1)
     datanum1=[]
     for i in data1.split(' '):
         datanum1.append(int(i))
-    datanum1=list(datanum1)
-	
     requestData=request.GET.copy()
     data2=requestData['user_data2']
-    data2=data2.encode('utf-8')
+    data2=str(data2)
     datanum2=[]
     for i in data2.split(' '):
         datanum2.append(int(i))
-    datanum2=list(datanum2)
-    
     res=ttest_ind(datanum1,datanum2,equal_var=False)
     t=round(float(res[0]),4)
     p=round(float(res[1]),4)
