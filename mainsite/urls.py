@@ -119,6 +119,14 @@ urlpatterns = [
     url(r'^datalabs/wc2/$',views.wc2,name='wc2'),
     #wc2res
     url(r'^datalabs/wc2/wc2res/$',views.wc2res,name='wc2res'),
+    #oner
+    url(r'^datalabs/oner/$',views.oner,name='oner'),
+    #onerres
+    url(r'^datalabs/oner/onerres/$',views.onerres,name='onerres'),
+    #onerup
+    url(r'^datalabs/onerup/$',views.onerup,name='onerup'),
+    #onerupres
+    url(r'^datalabs/onerup/onerupres/$',views.onerupres,name='onerupres'),
 ]
 
 

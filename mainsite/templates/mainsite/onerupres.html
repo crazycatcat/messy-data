@@ -1,0 +1,20 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h1 style='font-family:微软雅黑'>自主数据提交OnR分析结果:</h1><br/>
+{% endblock %}
+
+{% block content %}
+    <h3 style='font-family:宋体'><strong>总样本量：</strong>{{n}}</h3><br/>
+	<h3 style='font-family:宋体'><strong>训练数据集总数：</strong>{{numtr}}</h3><br/>
+	<h3 style='font-family:宋体'><strong>测试数据及总数：</strong>{{numte}}</h3><br/>
+	<h3 style='font-family:宋体'><strong>规则：</strong>{{rule}}</h3><br/>
+	<h3 style='font-family:宋体'><strong>测试数据及预测准确率：</strong>{{Accuracy}}</h3><br/>
+	<h3 style='font-family:宋体'><strong>总体报告：</strong></h3><br/>
+	{% for i in report %}
+        <h3 style='font-family:微软雅黑'>{{ i }}</h3>
+    {% endfor %}<br/>
+	
+
+
+{% endblock content %}

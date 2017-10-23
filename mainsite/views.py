@@ -42,6 +42,7 @@ from PIL import Image,ImageDraw
 from wordcloud import WordCloud, STOPWORDS
 import jieba
 from .affinity import *
+from .oner import *
 
 # Create your views here.
 
@@ -653,6 +654,7 @@ def affinityres(request):
 def affup(request):
     return render(request,'mainsite/affup.html')
 	
+@login_required
 def affupres(request):
     form = UploadExcelForm(request.POST, request.FILES)
     if form.is_valid():
@@ -696,7 +698,7 @@ def affupres(request):
     
     sorted_support=sorted(support.items(),key=itemgetter(1),reverse=True)
     suppres=[]
-    for index in range(10):
+    for index in range(20):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_support[index][0]
 
@@ -704,7 +706,7 @@ def affupres(request):
 
     sorted_confidence=sorted(confidence.items(),key=itemgetter(1),reverse=True)
     confres=[]
-    for index in range(10):
+    for index in range(20):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_confidence[index][0]
 
@@ -712,3 +714,91 @@ def affupres(request):
     n=nrows-1
     context={'suppres':suppres,'confres':confres,'n':n}
     return render(request,'mainsite/affupres.html',context)
+
+def oner(request):
+    return render(request,'mainsite/oner.html')
+	
+@login_required
+def onerres(request):
+    n=nrows-1
+    context={'numtr':numtr,'numte':numte,'n':n,'rule':rule,'Accuracy':Accuracy,'report':report,}
+    return render(request,'mainsite/onerres.html',context)
+	
+def onerup(request):
+    return render(request,'mainsite/onerup.html')
+
+@login_required
+def onerupres(request):
+    form = UploadExcelForm(request.POST, request.FILES)
+    if form.is_valid():
+        wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read())
+    wb=wb.sheets()[0]
+    nrows = wb.nrows
+    ncols = wb.ncols
+    n=nrows-1
+    X=[];Y=[]
+    for i in range(1, nrows):
+        col =wb.row_values(i)
+        col=col[1:]
+        X.append(col[:-1]);Y.append(col[-1])
+    X=np.array(X)
+    y=np.array(Y)
+    n_samples, n_features = X.shape
+    def train_feature_value(X,y_true,feature,value):
+        class_counts=defaultdict(int)
+        for sample,y in zip(X,y_true):
+            if sample[feature]==value:
+                class_counts[y]+=1
+        sorted_class_counts=sorted(class_counts.items(), key=itemgetter(1), reverse=True)
+        most_frequent_class = sorted_class_counts[0][0]
+        n_samples = X.shape[1]
+        incorrect_predictions=[class_count for class_value, class_count in class_counts.items() if class_value != most_frequent_class]
+        error=sum(incorrect_predictions)
+        return most_frequent_class,error
+
+    def train(X, y_true, feature):
+        n_samples, n_features = X.shape
+        assert 0 <= feature < n_features    
+        values = set(X[:,feature])
+        predictors ={}
+        errors = []
+        for current_value in values:
+            most_frequent_class, error = train_feature_value(X, y_true, feature, current_value)
+            predictors[current_value] = most_frequent_class
+            errors.append(error)
+        total_error = sum(errors)
+        return predictors, total_error
+
+    X_train,X_test,y_train,y_test=train_test_split(X,y)
+    numtr="随机划分出  {}  例纳入训练数据集".format(y_train.shape[0])
+    numte="随机划分出  {}  例纳入测试数据集（占总数的25%左右）".format(y_test.shape[0])
+
+
+    all_predictors = {variable: train(X_train, y_train, variable) for variable in range(X_train.shape[1])}
+    errors = {variable: error for variable, (mapping, error) in all_predictors.items()}
+    best_variable, best_error = sorted(errors.items(), key=itemgetter(1))[0]
+
+    model = {'variable': best_variable,'predictor': all_predictors[best_variable][0]}
+    rule=model['predictor']
+    def predict(X_test,model):
+        variable=model['variable']
+        predictor=model['predictor']
+        y_predicted=np.array([predictor[sample[variable]] for sample in X_test])
+        return y_predicted
+
+    y_predicted=predict(X_test,model)
+    accuracy=np.mean(y_predicted==y_test)*100
+    Accuracy="测试集预测准确率为 {:.1f}%".format(accuracy)
+    report=classification_report(y_test, y_predicted)
+    report=report.replace('             precision','target       precision')
+    report=report.replace(' ','  ')
+    
+    
+    
+    
+    
+    report=report.split('\n')
+    
+    
+    context={'numtr':numtr,'numte':numte,'n':n,'rule':rule,'Accuracy':Accuracy,'report':report,}
+    return render(request,'mainsite/onerupres.html',context)

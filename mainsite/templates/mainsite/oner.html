@@ -1,0 +1,27 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>1.卒中住院患者死亡危险因素分析（示例演示）</h2><br/>
+  <h4 style='font-family:微软雅黑'>说明：本演示示例与Apriori示例所用数据相同但两种分析方法的侧重点不同，Apriori算法更侧重于寻找多个危险因素的搭配组合导致死亡；OneR分类器则简单直接寻找最具准确性的单一一个Rule，并给出其分类准确率。而在一些特征较多的数据集中，例如著名的蘑菇数据集，OneR的分类准确率升值高达98.5%，在运行示例结果中提供该数据集下载链接，可放入自主上传数据中进行验证。</h4>
+  <h4 style='font-family:微软雅黑'><strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <img src="{% static 'images/oner.PNG' %}" /><h5>……后省略（共一百个处方）</h5>
+	  <br/>
+	  
+	  <h3><a href="{% url 'mainsite:onerres' %}" style='font-family:微软雅黑'>运行示例（需要注册登录）</a></h3>
+
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}

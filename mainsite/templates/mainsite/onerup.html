@@ -1,0 +1,20 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>自主数据提交OnR分析</h2><br/>
+  <h4 style='font-family:宋体'>注意：格式参照示例，保存为Excel提交。</h4>
+
+{% endblock %}
+
+{% block content %}
+<h4 style='font-family:宋体'>注意：默认第一行为标题，在计算时会读取；第一列为ID，在数据计算时会被忽略;最后一列默认为目标变量，例如示例中的结局。</h4>
+<h4><div class='container'>
+
+<h3>提交并计算你的数据：</h3>
+ <form action="{% url 'mainsite:onerupres' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="excel">
+  <input type="submit" value="提交">
+ </form>
+</div></h4>
+{% endblock content %}
