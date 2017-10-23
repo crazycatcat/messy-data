@@ -674,8 +674,6 @@ def affupres(request):
     vaild_rules=defaultdict(int)
     invaild_rules=defaultdict(int)
     num_occurances=defaultdict(int)
-
-
     for sample in X:
         for premise in range(n_features):
             if sample[premise]==0:continue
@@ -686,7 +684,6 @@ def affupres(request):
                     vaild_rules[(premise,conclusion)]+=1
                 else:
                     invaild_rules[(premise,conclusion)]+=1
-
     support=vaild_rules
     confidence=defaultdict(float)
     for premise,conclusion in vaild_rules.keys():
@@ -695,21 +692,17 @@ def affupres(request):
     premise_name=features[premise]
     conclusion_name=features[conclusion]
     res="选择  {0}  的同时也会选择 {1}。   - 支持度：{2}\n - 置信度：{3:.3f}\n".format(premise_name,conclusion_name,support[(premise,conclusion)],confidence[(premise,conclusion)])
-    
     sorted_support=sorted(support.items(),key=itemgetter(1),reverse=True)
     suppres=[]
     for index in range(20):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_support[index][0]
-
         suppres.append(i+print_rule2(premise,conclusion,support,confidence,features))
-
     sorted_confidence=sorted(confidence.items(),key=itemgetter(1),reverse=True)
     confres=[]
     for index in range(20):
         i="规则 #{0}\n".format(index+1)
         premise,conclusion=sorted_confidence[index][0]
-
         confres.append(i+print_rule2(premise,conclusion,support,confidence,features))
     n=nrows-1
     context={'suppres':suppres,'confres':confres,'n':n}
@@ -768,16 +761,12 @@ def onerupres(request):
             errors.append(error)
         total_error = sum(errors)
         return predictors, total_error
-
     X_train,X_test,y_train,y_test=train_test_split(X,y)
     numtr="随机划分出  {}  例纳入训练数据集".format(y_train.shape[0])
     numte="随机划分出  {}  例纳入测试数据集（占总数的25%左右）".format(y_test.shape[0])
-
-
     all_predictors = {variable: train(X_train, y_train, variable) for variable in range(X_train.shape[1])}
     errors = {variable: error for variable, (mapping, error) in all_predictors.items()}
     best_variable, best_error = sorted(errors.items(), key=itemgetter(1))[0]
-
     model = {'variable': best_variable,'predictor': all_predictors[best_variable][0]}
     rule=model['predictor']
     def predict(X_test,model):
@@ -785,20 +774,12 @@ def onerupres(request):
         predictor=model['predictor']
         y_predicted=np.array([predictor[sample[variable]] for sample in X_test])
         return y_predicted
-
     y_predicted=predict(X_test,model)
     accuracy=np.mean(y_predicted==y_test)*100
     Accuracy="测试集预测准确率为 {:.1f}%".format(accuracy)
-    report=classification_report(y_test, y_predicted)
+    report=classification_report(y_test, y_predicted,digits=3)
     report=report.replace('             precision','target       precision')
     report=report.replace(' ','  ')
-    
-    
-    
-    
-    
     report=report.split('\n')
-    
-    
     context={'numtr':numtr,'numte':numte,'n':n,'rule':rule,'Accuracy':Accuracy,'report':report,}
     return render(request,'mainsite/onerupres.html',context)

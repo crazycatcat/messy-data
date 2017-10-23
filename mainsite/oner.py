@@ -84,7 +84,7 @@ y_predicted=predict(X_test,model)
 
 accuracy=np.mean(y_predicted==y_test)*100
 Accuracy="测试集预测准确率为 {:.1f}%".format(accuracy)
-report=classification_report(y_test, y_predicted)
+report=classification_report(y_test, y_predicted,digits=3)
 report=report.replace('             precision','结局\t\t准确率')
 report=report.replace('    recall','\t\t召回率')
 report=report.replace('\n         ','\n')
