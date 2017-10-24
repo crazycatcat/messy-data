@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^adminnn/', include(admin.site.urls)),
     url(r'^users/', include('users.urls',namespace='users')),
     url(r'',include('mainsite.urls',namespace='mainsite')),
     #url(r'^users/',include('registration.backends.hmac.urls')),

@@ -57,7 +57,7 @@ class itemEntry(models.Model):
         verbose_name_plural='itementries'
         
       
-    def __unicode__(self):
+    def __str__(self):
         return self.text[:50]+'...'
 		
 class Statistic(models.Model):
