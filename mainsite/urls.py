@@ -127,6 +127,10 @@ urlpatterns = [
     url(r'^datalabs/onerup/$',views.onerup,name='onerup'),
     #onerupres
     url(r'^datalabs/onerup/onerupres/$',views.onerupres,name='onerupres'),
+    #facerec
+    url(r'^datalabs/facerec/$',views.facerec,name='facerec'),
+    #facerecres
+    url(r'^datalabs/facerec/facerecres/$',views.facerecres,name='facerecres'),
 ]
 
 

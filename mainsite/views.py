@@ -771,3 +771,10 @@ def onerupres(request):
     report=report.split('\n')
     context={'numtr':numtr,'numte':numte,'n':n,'rule':rule,'Accuracy':Accuracy,'report':report,}
     return render(request,'mainsite/onerupres.html',context)
+	
+def facerec(request):
+    return render(request,'mainsite/facerec.html')
+
+@login_required
+def facerecres(request):
+    return render(request,'mainsite/facerecres.html')

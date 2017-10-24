@@ -1,0 +1,44 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>简单亲和性分析对针刺治疗周围性面瘫主穴搭配规律研究（示例演示）结果：</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>
+<p>说明：默认提取最优50张人面部特征，且滤过原始数据集中图片少于70的人。</p>
+<p>总数据集规模:</p>
+<p>总共样本量: 1090</p>
+<p>总共特征数: 1850</p>
+<p>总共分类: 5</p>
+<p>从  817 张符合标准的图片中提取前 50 张特征化面部</p>
+<p>正在拟合训练集与分类器</p>
+<p>网格搜索后最佳估计:</p>
+<pre><p>                   precision    recall  f1-score   support</p>
+<p>     Colin Powell       <span style="color:red">0.89</span>      0.87      0.88        63</p>
+<p>    George W Bush       <span style="color:red">0.88</span>      0.96      0.92       125</p>
+<p>Gerhard Schroeder       0.81      0.81      0.81        26</p>
+<p>      Hugo Chavez       <span style="color:red">1.00</span>      0.76      0.87        17</p>
+<p>       Tony Blair       0.83      0.71      0.77        42</p>
+<p>      avg / total       <span style="color:red">0.88</span>      0.88      0.87       273</p></pre>
+
+<p>混淆矩阵：</p>
+<pre><p> [[ 55   4   0   0   4]</p>
+<p> [  3 120   2   0   0]</p>
+<p> [  0   3  21   0   2]</p>
+<p> [  2   1   1  13   0]</p>
+<p> [  2   8   2   0  30]]</p></pre>
+</h4>
+<h3>说明二：</span>委瑞内拉的查韦斯、美国鲍威尔和小布什测试识别准确率分别达到了100%、89%、88%。没有把<strong>小布什</strong>认成<strong>普京</strong>;也没把<strong>鲍威尔</strong>认成<strong>摩根.弗里曼</strong>。<br/>
+没找到<strong><span style="color:red">甘道夫</span></strong>和<strong><span style="color:red">邓布利多</span></strong>的图库，很想试试。<span style="color:red">下面有多图。</span></h3>
+{% load staticfiles %}
+<table><tr>
+      <td><h3>测试集测试结果</h3><img src="{% static 'images/facerec3.png' %}" /></td>
+	  <td><h3>对应的面部特征</h3><img src="{% static 'images/facerec4.png' %}" /></td>
+</tr></table>
+
+
+
+{% endblock content %}
