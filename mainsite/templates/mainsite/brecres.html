@@ -1,0 +1,33 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>识别鉴定脑出血和脑梗塞的CT影像结果：</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>
+<p>总数据集规模:</p>
+<p>总共样本量: 142张图片</p>
+<p>总共特征数: 11750</p>
+<p>总共分类: 2</p>
+<pre><p>      分类         准确率    召回率  F1-score   测试集中所使用数量</p>
+<p>     脑出血       <span style="color:red">0.95</span>      0.80      0.87        25</p>
+<p>     脑梗塞       <span style="color:red">0.67</span>      0.91      0.77        11</p>
+<p>    平均/总计      <span style="color:red">0.87</span>      0.83      0.84       36</p></pre>
+
+<p>混淆矩阵：</p>
+<pre><p> [[ 25   5]</p>
+<p> [  1 10]]</p></pre>
+</h4>
+<h3>结果：</span>脑出血的准确识别率达到了95%，脑梗塞的准确识别率仅有67%（由于脑梗塞数据集仅有55张图片），汇总的识别率为<span style="color:red">87%</span>。</h3>
+{% load staticfiles %}
+<table><tr>
+      <td><h3>测试集部分测试结果:</h3><img src="{% static 'images/brec1.png' %}" /></td>
+	  <td><h3>对应特征:</h3><img src="{% static 'images/brec2.png' %}" /></td>
+</tr></table>
+
+
+
+{% endblock content %}

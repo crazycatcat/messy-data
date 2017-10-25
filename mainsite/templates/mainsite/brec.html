@@ -1,0 +1,27 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>识别鉴定脑出血和脑梗塞的CT影像</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <h3><a href="{% static 'files/脑_出血.rar' %}" download="脑_出血.rar">脑出血数据集下载</a></h3><br/>
+	  <h3><a href="{% static 'files/脑_梗塞.rar' %}" download="脑_梗塞.rar">脑梗塞数据集下载</a></h3><br/>
+
+
+	  <h3><a href="{% url 'mainsite:brecres' %}" style='font-family:微软雅黑'>运行示例（需要注册登录）</a></h3>
+
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}

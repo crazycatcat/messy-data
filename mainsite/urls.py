@@ -105,7 +105,7 @@ urlpatterns = [
     url(r'^datalabs/caa/$',views.caa,name='caa'),
     #caares
     url(r'^datalabs/caa/caares$',views.caares,name='caares'),
-   #cdna
+    #cdna
     url(r'^datalabs/cdna/$',views.cdna,name='cdna'),
     #cdnares
     url(r'^datalabs/cdna/cdnares$',views.cdnares,name='cdnares'),
@@ -131,6 +131,10 @@ urlpatterns = [
     url(r'^datalabs/facerec/$',views.facerec,name='facerec'),
     #facerecres
     url(r'^datalabs/facerec/facerecres/$',views.facerecres,name='facerecres'),
+    #brec
+    url(r'^datalabs/brec/$',views.brec,name='brec'),
+    #brecres
+    url(r'^datalabs/brec/brecres/$',views.brecres,name='brecres'),
 ]
 
 

@@ -778,3 +778,10 @@ def facerec(request):
 @login_required
 def facerecres(request):
     return render(request,'mainsite/facerecres.html')
+	
+def brec(request):
+    return render(request,'mainsite/brec.html')
+
+@login_required
+def brecres(request):
+    return render(request,'mainsite/brecres.html')
