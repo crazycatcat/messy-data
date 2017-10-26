@@ -43,6 +43,7 @@ from wordcloud import WordCloud, STOPWORDS
 import jieba
 from .affinity import *
 from .oner import *
+from .mcwriter import *
 
 # Create your views here.
 
@@ -785,3 +786,9 @@ def brec(request):
 @login_required
 def brecres(request):
     return render(request,'mainsite/brecres.html')
+
+	
+def mcw(request):
+    a=generate(cfd)
+    context={'a':a}
+    return render(request,'mainsite/mcw.html',context)

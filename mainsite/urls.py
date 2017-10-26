@@ -135,6 +135,8 @@ urlpatterns = [
     url(r'^datalabs/brec/$',views.brec,name='brec'),
     #brecres
     url(r'^datalabs/brec/brecres/$',views.brecres,name='brecres'),
+    #mcw
+    url(r'^datalabs/mcw/$',views.mcw,name='mcw'),
 ]
 
 
