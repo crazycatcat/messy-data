@@ -145,6 +145,10 @@ urlpatterns = [
     #url(r'^datalabs/logup/$',views.logup,name='logup'),
     #logupres
     #url(r'^datalabs/logup/logupres/$',views.logupres,name='logupres'),
+    #ada
+    url(r'^datalabs/ada/$',views.ada,name='ada'),
+    #adares
+    url(r'^datalabs/ada/adares/$',views.adares,name='adares'),
 ]
 
 

@@ -802,8 +802,8 @@ def log(request):
 def logres(request):
     return render(request,'mainsite/logres.html')
 
-def logup(request):
-    return render(request,'mainsite/logup.html')
+#def logup(request):
+    #return render(request,'mainsite/logup.html')
 
 '''@login_required
 def logupres(request):
@@ -870,3 +870,10 @@ def logupres(request):
     context={'y':y,'a':a}
         
     return render(request,'mainsite/logupres.html',context)'''
+	
+def ada(request):
+    return render(request,'mainsite/ada.html')
+
+@login_required
+def adares(request):
+    return render(request,'mainsite/adares.html')
