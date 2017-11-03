@@ -1,0 +1,26 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>1.逻辑回归结合随机梯度上升算法在某病病人最终结局的分析和预测（数据集中包含30%的缺失值）示例</h2><br/>
+  <h4 style='font-family:宋体'>简介：逻辑回归大家都学过啦~~~<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+  <h4 style='font-family:宋体'><i>说明：在自主提交数据开放以后，研究内容可自行脑补……</i><h4>
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <img src="{% static 'images/logex.PNG' %}" /><h5>……后省略</h5>
+	  <br/>
+	  <h4>总共有三百六七十个病例资料（均有缺失值）其中三百例用来交给计算机学习，其余用于预测。</h4>
+	  <h3><a href="{% url 'mainsite:logres' %}" style='font-family:微软雅黑'>查看结果（需要注册登录，运行速度较慢，为了防止服务器罢工，直接贴出数据）</a></h3>
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

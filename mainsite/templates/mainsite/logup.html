@@ -1,0 +1,32 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>逻辑回归自主提交数据</h2><br/>
+  <h4 style='font-family:宋体'>简介：逻辑回归大家都学过啦~~~<strong>注意：本演示示例不可直接应用于临床、写作或引用于论文中，自主上传数据开放后所得结果则可以。</strong></h4>
+  <h4 style='font-family:宋体'><i>说明：在自主提交数据开放以后，研究内容可自行脑补……</i></h4>
+{% endblock %}
+
+{% block content %}
+
+<h4>选择你的数据：</h4>
+<h4>格式要求:特征值均为数字 ，具体参照示例，提交格式为.txt，标题行需删除。Excel保存时选txt格式并以制表符间隔。</h4>
+<form method="post" action="{% url 'mainsite:logupres'   %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id='logupfile' type="file" name="logupfile" />
+        <input type="submit" value='提交' />
+    </form>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+{% endblock content %}

@@ -44,6 +44,8 @@ import jieba
 from .affinity import *
 from .oner import *
 from .mcwriter import *
+#from .log import *
+#from .facerec import *
 
 # Create your views here.
 
@@ -792,3 +794,79 @@ def mcw(request):
     a=generate(cfd)
     context={'a':a}
     return render(request,'mainsite/mcw.html',context)
+	
+def log(request):
+    return render(request,'mainsite/log.html')
+
+@login_required
+def logres(request):
+    return render(request,'mainsite/logres.html')
+
+def logup(request):
+    return render(request,'mainsite/logup.html')
+
+'''@login_required
+def logupres(request):
+    if request.method == 'POST':
+        wb=request.FILES['logupfile']
+        wb=wb.read().decode('utf-8')
+    def sigmoid(inX):
+        return 1.0/(1+exp(-inX))
+
+    def stocGradAscent1(dataMatrix, classLabels, numIter=150):
+        m,n = shape(dataMatrix)
+        weights = ones(n)   #initialize to all ones
+        for j in range(numIter):
+            dataIndex = range(m)
+            for i in range(m):
+                alpha = 4/(1.0+j+i)+0.0001    #apha decreases with iteration, does not 
+                randIndex = int(random.uniform(0,len(dataIndex)))#go to 0 because of the constant
+                h = sigmoid(sum(dataMatrix[randIndex]*weights))
+                error = classLabels[randIndex] - h
+                weights = weights + alpha * error * dataMatrix[randIndex]
+                del(dataIndex[randIndex])
+        return weights
+
+    def classifyVector(inX, weights):
+        prob = sigmoid(sum(inX*weights))
+        if prob > 0.5: return 1.0
+        else: return 0.0
+        
+        
+        
+        
+    numTests =5; errorSum=0.0
+    y=[]
+    for k in range(numTests):
+        frTrain1 = open(wb).read(); frTest1 = open(wb).read()
+        frTrain=frTrain1;frTest=frTest1
+        trainingSet = []; trainingLabels = []
+        for line in frTrain:
+            currLine = line.strip().split('\t')
+            lineArr =[]
+            for i in range(21):
+                lineArr.append(float(currLine[i]))
+        trainingSet.append(lineArr)
+        trainingLabels.append(float(currLine[21]))
+        trainWeights = stocGradAscent1(array(trainingSet), trainingLabels, 1000)
+        errorCount = 0; numTestVec = 0.0
+        for line in frTest:
+            numTestVec += 1.0
+            currLine = line.strip().split('\t')
+            lineArr =[]
+            for i in range(21):
+                lineArr.append(float(currLine[i]))
+            if int(classifyVector(array(lineArr), trainWeights))!= int(currLine[21]):
+                errorCount += 1
+        errorRate = (float(errorCount)/numTestVec)
+        x="本次测试错误率为: %f" % errorRate
+        errorSum += errorRate
+        y=y.append(x)
+    a="在经过 %d 次迭代后平均错误率为: %f" % (numTests, errorSum/float(numTests))
+        
+        
+        
+    y,a=multiTest(wb)
+    context={'y':y,'a':a}
+        
+    return render(request,'mainsite/logupres.html',context)'''

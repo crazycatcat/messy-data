@@ -137,6 +137,14 @@ urlpatterns = [
     url(r'^datalabs/brec/brecres/$',views.brecres,name='brecres'),
     #mcw
     url(r'^datalabs/mcw/$',views.mcw,name='mcw'),
+    #log
+    url(r'^datalabs/log/$',views.log,name='log'),
+    #logres
+    url(r'^datalabs/log/logres/$',views.logres,name='logres'),
+    #logup
+    #url(r'^datalabs/logup/$',views.logup,name='logup'),
+    #logupres
+    #url(r'^datalabs/logup/logupres/$',views.logupres,name='logupres'),
 ]
 
 
