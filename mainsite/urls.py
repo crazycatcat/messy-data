@@ -149,6 +149,10 @@ urlpatterns = [
     url(r'^datalabs/ada/$',views.ada,name='ada'),
     #adares
     url(r'^datalabs/ada/adares/$',views.adares,name='adares'),
+    #nndl
+    url(r'^datalabs/nndl/$',views.nndl,name='nndl'),
+    #nndlres
+    url(r'^datalabs/nndl/nndlres/$',views.nndlres,name='nndlres'),
 ]
 
 

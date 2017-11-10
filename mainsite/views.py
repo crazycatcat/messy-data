@@ -47,7 +47,8 @@ from .mcwriter import *
 #from .log import *
 #from .facerec import *
 
-# Create your views here.
+
+
 
 def index(request):
     return render(request,'mainsite/index.html')
@@ -802,10 +803,10 @@ def log(request):
 def logres(request):
     return render(request,'mainsite/logres.html')
 
-#def logup(request):
-    #return render(request,'mainsite/logup.html')
+'''def logup(request):
+    return render(request,'mainsite/logup.html')
 
-'''@login_required
+@login_required
 def logupres(request):
     if request.method == 'POST':
         wb=request.FILES['logupfile']
@@ -864,9 +865,25 @@ def logupres(request):
         y=y.append(x)
     a="在经过 %d 次迭代后平均错误率为: %f" % (numTests, errorSum/float(numTests))
         
+    form = UploadExcelForm(request.POST, request.FILES)
+    wb = xlrd.open_workbook(filename=None, file_contents=request.FILES['excel'].read()) # 关键点在于这里
+
+    
+    data=[]
+    table = wb.sheets()[0]#获取整个第一张表
+    
+    #col = table.ncols
+    row = table.nrows
+    #print col,row
+    for i in range(0, row):
+        col = table.row_values(i)
+        print(col)
+        data.append(col)
+    
+    print(data)
+    
         
-        
-    y,a=multiTest(wb)
+    y,a=multiTest(data)
     context={'y':y,'a':a}
         
     return render(request,'mainsite/logupres.html',context)'''
@@ -877,3 +894,12 @@ def ada(request):
 @login_required
 def adares(request):
     return render(request,'mainsite/adares.html')
+
+def nndl(request):
+    return render(request,'mainsite/nndl.html')
+
+@login_required
+def nndlres(request):
+
+
+    return render(request,'mainsite/nndlres.html')

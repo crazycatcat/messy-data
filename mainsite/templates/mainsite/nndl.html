@@ -1,0 +1,27 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>4.手写数字识别</h2><br/>
+
+
+{% endblock %}
+
+{% block content %}
+<h5>手写数字识别原始训练集具有版权，所以不能开放下载</h5>
+	  <br/>
+	  {% load staticfiles %}
+      <img src="{% static 'images/d.png' %}" /><h5>大概长这样</h5>
+	  <br/>
+	  
+	  <h3><a href="{% url 'mainsite:nndlres' %}" style='font-family:微软雅黑'>运行示例（需要注册登录）</a></h3>
+
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}

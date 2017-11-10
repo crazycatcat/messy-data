@@ -24,21 +24,20 @@ def classifyVector(inX, weights):
     if prob > 0.5: return 1.0
     else: return 0.0
 
-def colicTest(ff):
+def colicTest(data):
     #frTrain = open(); frTest = open()
     #x=ff.readlines()
     trainingSet = []; trainingLabels = []
-    for line in ff:
+    for line in data:
         #line=unicode(line,'utf8')
-        currLine = line.strip().split('\t')
+        currLine = line
         lineArr =[]
-        for i in range(20):
-            lineArr.append(float(currLine[i]))
-        trainingSet.append(lineArr)
-        trainingLabels.append(float(currLine[21]))
+        
+        trainingSet.append(currLine)
+        trainingLabels.append(float(currLine[20]))
     trainWeights = stocGradAscent1(array(trainingSet), trainingLabels, 1000)
     errorCount = 0; numTestVec = 0.0
-    for line in ff:
+    for line in data:
         #line=unicode(line,'utf8')
         numTestVec += 1.0
         currLine = line.strip().split('\t')
@@ -51,13 +50,13 @@ def colicTest(ff):
     x="本次测试错误率为: %f" % errorRate
     return errorRate,x
 
-def multiTest(f):
+def multiTest(data):
     
-    ff=f#[line for line in f.readlines()]
+
     numTests =5; errorSum=0.0
     y=[]
     for k in range(numTests):
-        errorSum += colicTest(ff)[0]
-        y=y.append(colicTest(ff)[1])
+        errorSum += colicTest(data)[0]
+        y=y.append(colicTest(data)[1])
     a="在经过 %d 次迭代后平均错误率为: %f" % (numTests, errorSum/float(numTests))
     return y,a

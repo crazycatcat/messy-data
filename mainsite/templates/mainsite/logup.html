@@ -10,11 +10,16 @@
 
 <h4>选择你的数据：</h4>
 <h4>格式要求:特征值均为数字 ，具体参照示例，提交格式为.txt，标题行需删除。Excel保存时选txt格式并以制表符间隔。</h4>
-<form method="post" action="{% url 'mainsite:logupres'   %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input id='logupfile' type="file" name="logupfile" />
-        <input type="submit" value='提交' />
-    </form>
+      <div class='container'>
+
+
+<h3>提交并计算你的数据：</h3>
+ <form action="{% url 'mainsite:logupres' %}" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <input type="file" name="excel">
+  <input type="submit" value="提交">
+ </form>
+</div>
 	  
 	  
 	  
