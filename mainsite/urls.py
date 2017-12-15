@@ -153,6 +153,10 @@ urlpatterns = [
     url(r'^datalabs/nndl/$',views.nndl,name='nndl'),
     #nndlres
     url(r'^datalabs/nndl/nndlres/$',views.nndlres,name='nndlres'),
+    #4BC
+    url(r'^datalabs/bc/$',views.bc,name='bc'),
+    #4BCres
+    url(r'^datalabs/bc/bcres/$',views.bcres,name='bcres'),
 ]
 
 

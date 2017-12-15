@@ -903,3 +903,10 @@ def nndlres(request):
 
 
     return render(request,'mainsite/nndlres.html')
+
+def bc(request):
+    return render(request,'mainsite/bc.html')
+
+@login_required
+def bcres(request):
+    return render(request,'mainsite/bcres.html')

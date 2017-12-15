@@ -1,0 +1,30 @@
+{% extends "mainsite/base.html" %}
+
+{% block header %}
+  <h2 style='font-family:微软雅黑'>乳腺肿瘤细胞病例数据识别：基于四种分类器（随机最速下降法、逻辑回归、支持向量机、随机森林）</h2><br/>
+  <h4 style='font-family:宋体'><strong>注意：本示例数据来自威斯康辛州大学开源数据，提供下载但不可用于论文写作。由于不是病理专业中文翻译或有误差。</strong></h4>
+
+{% endblock %}
+
+{% block content %}
+<h4>原始数据：</h4>
+{% load staticfiles %}
+      <h3><a href="{% static 'files/bcdata.csv' %}" download="bcdata.csv">数据集下载</a></h3><br/>
+	  <img src="{% static 'images/bc0.PNG' %}" /><h5>……后省略</h5>
+	  <br/>
+	  <h4>总共有569例样本。</h4>
+
+
+
+	  <h3><a href="{% url 'mainsite:bcres' %}" style='font-family:微软雅黑'>运行示例（需要注册登录）</a></h3>
+
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}
